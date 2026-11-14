@@ -1,265 +1,921 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infropay | MEGA Storage Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#030a12">
+<title>LowticketPay - Dashboard</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #030a12;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+}
+
+/* BARRA SUPERIOR */
+.top-toolbar {
+    width: 100%;
+    height: 100px;
+    padding: 0 7.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #030a12;
+}
+
+.toolbar-left,
+.toolbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.toolbar-right {
+    gap: 65px;
+}
+
+.toolbar-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.toolbar-button svg {
+    width: 40px;
+    height: 40px;
+    fill: none;
+    stroke: #858585;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* FUNDO DO MENU */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 998;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* MENU LATERAL */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    max-width: 85%;
+    height: 100vh;
+    height: 100dvh;
+    background: #030a12;
+    border-right: 1px solid #292929;
+    padding: 25px 18px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+/* CABEÇALHO E LOGO DO MENU */
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 0 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #242a32;
+}
+
+.menu-logo {
+    width: 175px;
+    max-width: calc(100% - 35px);
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.menu-close {
+    background: transparent;
+    border: none;
+    color: #969eaa;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* LINKS DO MENU */
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.menu-links a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 13px;
+    border-radius: 9px;
+    color: #969eaa;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.menu-links a svg {
+    width: 21px;
+    height: 21px;
+    min-width: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.menu-links a:hover,
+.menu-links a.active {
+    background: #102237;
+    color: #20baf0;
+}
+
+.menu-section-title {
+    color: #606b78;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    margin: 25px 12px 10px;
+}
+
+/* CABEÇALHO DO DASHBOARD */
+.dashboard-heading {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 14px 16px;
+    background: #030a12;
+    border: 2px solid #292929;
+    border-radius: 11px;
+}
+
+.heading-content {
+    width: 100%;
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.dashboard-heading h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* SELETOR DE PERÍODO */
+.period-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px 16px;
+    min-height: 60px;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.period-left {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.calendar-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    fill: none;
+    stroke: #969eaa;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.period-text {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.arrow-icon {
+    width: 19px;
+    height: 19px;
+    min-width: 19px;
+    fill: none;
+    stroke: #969eaa;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* INDICADORES */
+.dashboard-stats {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: center;
+    background: #030a12;
+    border: 2px solid #292929;
+    border-radius: 11px;
+}
+
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: fit-content;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 0;
+}
+
+.stat-icon {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.stat-content {
+    min-width: 0;
+}
+
+.stat-label {
+    color: #969eaa;
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 9px;
+}
+
+.stat-value {
+    font-size: 30px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.faturamento .stat-value { color: #35aaff; }
+.lucro .stat-value { color: #70df39; }
+.falhas .stat-value { color: #ff6262; }
+.realizadas .stat-value { color: #70df39; }
+
+/* MEIOS DE PAGAMENTO */
+.payment-section {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 22px 20px;
+    background: #030a12;
+    border: 2px solid #292929;
+    border-radius: 11px;
+}
+
+.payment-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.payment-heading h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.payment-period {
+    font-size: 13px;
+    color: #969eaa;
+    white-space: nowrap;
+}
+
+.payment-table-header {
+    display: grid;
+    grid-template-columns: 1.5fr 0.85fr 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 0 5px 10px;
+    color: #969eaa;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.payment-table-header div:nth-child(2) { text-align: center; }
+.payment-table-header div:nth-child(3) { text-align: right; }
+
+.payment-row {
+    display: grid;
+    grid-template-columns: 1.5fr 0.85fr 1fr;
+    align-items: center;
+    gap: 10px;
+    min-height: 75px;
+    padding: 9px 5px;
+    border-top: 1px solid #292929;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.payment-method img {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    object-fit: contain;
+    display: block;
+}
+
+.payment-method span {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.payment-approval {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.approval-value {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.approval-bar {
+    width: 65px;
+    height: 6px;
+    background: #171717;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.approval-fill {
+    width: 0%;
+    height: 100%;
+    background: #70df39;
+    border-radius: 20px;
+    transition: width 0.3s ease;
+}
+
+.payment-amount {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+    .top-toolbar {
+        height: 85px;
+        padding: 0 7.5%;
     }
 
-    body {
-      background: #090909;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      padding: 25px 16px;
-      min-height: 100vh;
+    .toolbar-button svg {
+        width: 23px;
+        height: 35px;
     }
 
-    .container {
-      max-width: 460px;
-      margin: 40px auto;
+    .toolbar-right { gap: 35px; }
+
+    .dashboard-heading {
+        width: calc(100% - 26px);
+        padding: 12px;
+        margin: 18px auto;
     }
 
-    .logo {
-      font-size: 25px;
-      font-weight: 800;
-      margin-bottom: 8px;
+    .heading-content {
+        min-height: 62px;
+        gap: 8px;
     }
 
-    .logo span {
-      color: #6edc82;
+    .dashboard-heading h2 { font-size: 18px; }
+
+    .period-selector {
+        gap: 7px;
+        padding: 12px 10px;
+        min-height: 58px;
     }
 
-    .subtitle {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 28px;
+    .period-left { gap: 6px; }
+
+    .calendar-icon {
+        width: 19px;
+        height: 19px;
+        min-width: 19px;
     }
 
-    .panel {
-      background: #141414;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 22px;
+    .period-text { font-size: 11px; }
+
+    .arrow-icon {
+        width: 17px;
+        height: 17px;
+        min-width: 17px;
     }
 
-    label {
-      display: block;
-      font-size: 13px;
-      color: #bbb;
-      margin-bottom: 9px;
+    .dashboard-stats {
+        width: calc(100% - 26px);
+        padding: 25px 13px;
     }
 
-    input[type="password"] {
-      width: 100%;
-      padding: 14px;
-      background: #090909;
-      border: 1px solid #333;
-      border-radius: 9px;
-      color: white;
-      margin-bottom: 22px;
-      outline: none;
+    .stats-grid { gap: 35px; }
+
+    .stat-item { gap: 12px; }
+
+    .stat-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
     }
 
-    .file-area {
-      border: 1px dashed #555;
-      background: #0d0d0d;
-      border-radius: 12px;
-      padding: 25px 15px;
-      text-align: center;
-      margin-bottom: 20px;
+    .stat-label {
+        font-size: 12px;
+        margin-bottom: 8px;
     }
 
-    .file-area p {
-      color: #aaa;
-      font-size: 13px;
-      margin: 8px 0;
+    .stat-value { font-size: 17px; }
+
+    .payment-section {
+        width: calc(100% - 26px);
+        padding: 18px 12px;
     }
 
-    input[type="file"] {
-      width: 100%;
-      margin-top: 12px;
-      color: #aaa;
-      font-size: 12px;
+    .payment-heading { margin-bottom: 16px; }
+    .payment-heading h3 { font-size: 17px; }
+    .payment-period { font-size: 11px; }
+
+    .payment-table-header {
+        font-size: 11px;
+        grid-template-columns: 1.4fr 0.8fr 1fr;
+        padding-bottom: 8px;
+        gap: 5px;
     }
 
-    button {
-      width: 100%;
-      background: #6edc82;
-      border: none;
-      padding: 15px;
-      border-radius: 9px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #07100a;
+    .payment-row {
+        grid-template-columns: 1.4fr 0.8fr 1fr;
+        min-height: 65px;
+        padding: 7px 3px;
+        gap: 5px;
     }
 
-    button:disabled {
-      opacity: .5;
+    .payment-method { gap: 8px; }
+
+    .payment-method img {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
     }
 
-    #status {
-      margin-top: 18px;
-      font-size: 13px;
-      color: #aaa;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
+    .payment-method span { font-size: 12px; }
+    .approval-value { font-size: 15px; }
+
+    .approval-bar {
+        width: 48px;
+        height: 5px;
     }
 
-    .result {
-      margin-top: 15px;
-      padding: 14px;
-      background: #0c1c10;
-      border: 1px solid #245b31;
-      border-radius: 10px;
-      display: none;
+    .payment-approval { gap: 5px; }
+    .payment-amount { font-size: 12px; }
+}
+
+/* ECRÃS MUITO PEQUENOS */
+@media (max-width: 350px) {
+    .dashboard-heading {
+        width: calc(100% - 20px);
+        padding: 10px 8px;
     }
 
-    .result a {
-      display: block;
-      color: #6edc82;
-      margin-top: 12px;
-      overflow-wrap: anywhere;
+    .dashboard-heading h2 { font-size: 16px; }
+
+    .period-selector {
+        padding: 10px 7px;
+        gap: 5px;
     }
 
-    .note {
-      color: #777;
-      font-size: 11px;
-      line-height: 1.5;
-      margin-top: 20px;
+    .period-text { font-size: 10px; }
+
+    .calendar-icon {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
     }
-  </style>
+
+    .dashboard-stats {
+        width: calc(100% - 20px);
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .payment-section {
+        width: calc(100% - 20px);
+        padding: 15px 9px;
+    }
+
+    .payment-heading h3 { font-size: 15px; }
+
+    .payment-method img {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+    }
+
+    .payment-method span { font-size: 11px; }
+    .payment-amount { font-size: 11px; }
+    .approval-value { font-size: 14px; }
+    .approval-bar { width: 40px; }
+}
+</style>
 </head>
 
 <body>
 
-  <main class="container">
+<!-- BARRA SUPERIOR -->
+<nav class="top-toolbar">
+    <div class="toolbar-left">
+        <button class="toolbar-button"
+                id="menuButton"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+                aria-controls="sideMenu">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 5h18"/>
+                <path d="M3 12h18"/>
+                <path d="M3 19h18"/>
+            </svg>
+        </button>
+    </div>
 
-    <div class="logo">INFRO<span>PAY</span></div>
-    <p class="subtitle">MEGA Storage Test · Upload de ficheiros</p>
+    <div class="toolbar-right">
+        <button class="toolbar-button" aria-label="Notificações" type="button">
+            <svg viewBox="0 0 24 24">
+                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                <path d="M10 21h4"/>
+            </svg>
+        </button>
 
-    <section class="panel">
+        <button class="toolbar-button" aria-label="Tema" type="button">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2"/>
+                <path d="M12 20v2"/>
+                <path d="m4.93 4.93 1.42 1.42"/>
+                <path d="m17.65 17.65 1.42 1.42"/>
+                <path d="M2 12h2"/>
+                <path d="M20 12h2"/>
+                <path d="m4.93 19.07 1.42-1.42"/>
+                <path d="m17.65 6.35 1.42-1.42"/>
+            </svg>
+        </button>
+    </div>
+</nav>
 
-      <label for="accessKey">Chave de acesso ao teste</label>
-      <input
-        type="password"
-        id="accessKey"
-        placeholder="Introduz a chave de teste"
-      >
+<!-- FUNDO DO MENU -->
+<div class="menu-overlay" id="menuOverlay"></div>
 
-      <div class="file-area">
-        <div style="font-size:35px">☁️</div>
-        <strong>Selecionar ficheiro</strong>
-        <p>PDF, JPG, PNG ou WEBP</p>
-
-        <input
-          type="file"
-          id="file"
-          accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/jpeg,image/png,image/webp"
+<!-- MENU LATERAL -->
+<aside class="side-menu" id="sideMenu" aria-label="Menu principal">
+    <div class="menu-header">
+        <img
+            src="assets/lowticketpay.png"
+            alt="LowticketPay"
+            class="menu-logo"
         >
-      </div>
 
-      <button id="uploadBtn" onclick="sendFile()">
-        Enviar para o MEGA
-      </button>
+        <button class="menu-close"
+                id="menuClose"
+                aria-label="Fechar menu"
+                type="button">
+            &times;
+        </button>
+    </div>
 
-      <div id="status"></div>
-
-      <div class="result" id="result">
-        <strong>Upload concluído!</strong>
-        <p id="fileName"></p>
-        <a id="fileLink" target="_blank" rel="noopener noreferrer">
-          Abrir ficheiro no MEGA
+    <nav class="menu-links">
+        <a href="dashboard.html" class="active">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="8" height="8" rx="1"/>
+                <rect x="13" y="3" width="8" height="5" rx="1"/>
+                <rect x="13" y="10" width="8" height="11" rx="1"/>
+                <rect x="3" y="13" width="8" height="8" rx="1"/>
+            </svg>
+            Dashboard
         </a>
-      </div>
 
-      <p class="note">
-        Teste limitado a 3 MB por ficheiro.
-        Os links gerados são links públicos de partilha.
-        Não utilizes documentos confidenciais.
-      </p>
+        <a href="produtos.html">
+            <svg viewBox="0 0 24 24">
+                <path d="m3 7 9-4 9 4-9 4-9-4Z"/>
+                <path d="M3 7v10l9 4 9-4V7"/>
+                <path d="M12 11v10"/>
+            </svg>
+            Produtos
+        </a>
+
+        <a href="vitrine.html">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 10h18l-2-6H5l-2 6Z"/>
+                <path d="M4 10v10h16V10"/>
+                <path d="M9 20v-6h6v6"/>
+            </svg>
+            Vitrine
+        </a>
+
+
+        <a href="financeiro.html">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="5" width="18" height="15" rx="2"/>
+                <path d="M3 10h18"/>
+                <path d="M16 15h2"/>
+            </svg>
+            Financeiro
+        </a>
+    </nav>
+</aside>
+
+<!-- CABEÇALHO DO DASHBOARD -->
+<header class="dashboard-heading">
+    <div class="heading-content">
+        <h2>Dashboard</h2>
+
+        <div class="period-selector">
+            <div class="period-left">
+                <svg class="calendar-icon" viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2"/>
+                    <path d="M16 3v4M8 3v4M3 10h18"/>
+                    <path d="M8 14h.01M12 14h.01M16 14h.01"/>
+                    <path d="M8 17h.01M12 17h.01M16 17h.01"/>
+                </svg>
+                <span class="period-text">Últimos 7 dias</span>
+            </div>
+
+            <svg class="arrow-icon" viewBox="0 0 24 24">
+                <path d="m6 9 6 6 6-6"/>
+            </svg>
+        </div>
+    </div>
+</header>
+
+<!-- INDICADORES -->
+<main class="dashboard-stats">
+    <section class="stats-grid">
+
+        <div class="stat-item faturamento">
+            <svg class="stat-icon" viewBox="0 0 24 24">
+                <path d="M3 17l6-6 4 4 8-9"/>
+                <path d="M15 6h6v6"/>
+            </svg>
+            <div class="stat-content">
+                <div class="stat-label">Faturamento</div>
+                <div class="stat-value" id="faturamento">0,00 MT</div>
+            </div>
+        </div>
+
+        <div class="stat-item lucro">
+            <svg class="stat-icon" viewBox="0 0 24 24">
+                <path d="M12 2v20"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            <div class="stat-content">
+                <div class="stat-label">Lucro</div>
+                <div class="stat-value" id="lucro">0,00 MT</div>
+            </div>
+        </div>
+
+        <div class="stat-item falhas">
+            <svg class="stat-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="m9 9 6 6"/>
+                <path d="m15 9-6 6"/>
+            </svg>
+            <div class="stat-content">
+                <div class="stat-label">Vendas falhadas</div>
+                <div class="stat-value" id="vendasFalhadas">0</div>
+            </div>
+        </div>
+
+        <div class="stat-item realizadas">
+            <svg class="stat-icon" viewBox="0 0 24 24">
+                <path d="m5 12 4 4L19 6"/>
+                <path d="m3 17 2 2 4-4"/>
+            </svg>
+            <div class="stat-content">
+                <div class="stat-label">Vendas realizadas</div>
+                <div class="stat-value" id="vendasRealizadas">0</div>
+            </div>
+        </div>
 
     </section>
+</main>
 
-  </main>
+<!-- MEIOS DE PAGAMENTO -->
+<section class="payment-section">
+    <div class="payment-heading">
+        <h3>Meios de pagamento</h3>
+        <span class="payment-period">Últimos 7 dias</span>
+    </div>
+
+    <div class="payment-table-header">
+        <div>Método</div>
+        <div>Desempenho</div>
+        <div>Valor</div>
+    </div>
+
+    <div class="payment-row">
+        <div class="payment-method">
+            <img src="assets/mpesa.png" alt="M-Pesa">
+            <span>M-Pesa</span>
+        </div>
+
+        <div class="payment-approval">
+            <span class="approval-value" id="mpesaApproval">0%</span>
+            <div class="approval-bar">
+                <div class="approval-fill" id="mpesaBar"></div>
+            </div>
+        </div>
+
+        <div class="payment-amount" id="mpesaAmount">0,00 MT</div>
+    </div>
+
+    <div class="payment-row">
+        <div class="payment-method">
+            <img src="assets/emola.png" alt="e-Mola">
+            <span>e-Mola</span>
+        </div>
+
+        <div class="payment-approval">
+            <span class="approval-value" id="emolaApproval">0%</span>
+            <div class="approval-bar">
+                <div class="approval-fill" id="emolaBar"></div>
+            </div>
+        </div>
+
+        <div class="payment-amount" id="emolaAmount">0,00 MT</div>
+    </div>
+</section>
 
 <script>
-async function sendFile() {
-  const fileInput = document.getElementById("file");
-  const key = document.getElementById("accessKey").value;
-  const status = document.getElementById("status");
-  const button = document.getElementById("uploadBtn");
-  const result = document.getElementById("result");
+// DADOS DE DEMONSTRAÇÃO.
+// Estes valores começam em zero; ainda não estão ligados a uma base de dados.
+const dadosDashboard = {
+    faturamento: 0,
+    lucro: 0,
+    vendasFalhadas: 0,
+    vendasRealizadas: 0
+};
 
-  result.style.display = "none";
-
-  if (!key) {
-    status.textContent = "Introduz a chave de acesso.";
-    return;
-  }
-
-  if (!fileInput.files.length) {
-    status.textContent = "Seleciona primeiro um ficheiro.";
-    return;
-  }
-
-  const file = fileInput.files[0];
-
-  if (file.size > 3 * 1024 * 1024) {
-    status.textContent = "O ficheiro não pode ultrapassar 3 MB.";
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "A enviar...";
-  status.textContent = "A preparar o envio para o MEGA...";
-
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      headers: {
-        "x-test-key": key
-      },
-      body: formData
-    });
-
-    const data = await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(data.message || "Erro no envio.");
+const dadosPagamentos = {
+    mpesa: {
+        aprovacao: 0,
+        valor: 0
+    },
+    emola: {
+        aprovacao: 0,
+        valor: 0
     }
+};
 
-    status.textContent =
-      "Ficheiro enviado com sucesso!";
-
-    document.getElementById("fileName").textContent =
-      data.filename;
-
-    document.getElementById("fileLink").href =
-      data.link;
-
-    document.getElementById("fileLink").textContent =
-      data.link;
-
-    result.style.display = "block";
-
-  } catch (error) {
-    status.textContent = "Erro: " + error.message;
-  } finally {
-    button.disabled = false;
-    button.textContent = "Enviar para o MEGA";
-  }
+// FORMATAR MOEDA
+function formatarMoeda(valor) {
+    return Number(valor || 0).toLocaleString('pt-MZ', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }) + ' MT';
 }
+
+// ATUALIZAR INDICADORES
+function atualizarDashboard(dados) {
+    document.getElementById('faturamento').textContent =
+        formatarMoeda(dados.faturamento);
+
+    document.getElementById('lucro').textContent =
+        formatarMoeda(dados.lucro);
+
+    document.getElementById('vendasFalhadas').textContent =
+        Number(dados.vendasFalhadas || 0);
+
+    document.getElementById('vendasRealizadas').textContent =
+        Number(dados.vendasRealizadas || 0);
+}
+
+// ATUALIZAR MEIOS DE PAGAMENTO
+function atualizarPagamentos(dados) {
+    const mpesaPercentual = Math.min(
+        100, Math.max(0, Number(dados.mpesa.aprovacao) || 0)
+    );
+
+    document.getElementById('mpesaApproval').textContent =
+        mpesaPercentual + '%';
+
+    document.getElementById('mpesaAmount').textContent =
+        formatarMoeda(dados.mpesa.valor);
+
+    document.getElementById('mpesaBar').style.width =
+        mpesaPercentual + '%';
+
+    const emolaPercentual = Math.min(
+        100, Math.max(0, Number(dados.emola.aprovacao) || 0)
+    );
+
+    document.getElementById('emolaApproval').textContent =
+        emolaPercentual + '%';
+
+    document.getElementById('emolaAmount').textContent =
+        formatarMoeda(dados.emola.valor);
+
+    document.getElementById('emolaBar').style.width =
+        emolaPercentual + '%';
+}
+
+// CARREGAR DADOS INICIAIS
+atualizarDashboard(dadosDashboard);
+atualizarPagamentos(dadosPagamentos);
+
+// MENU LATERAL
+const menuButton = document.getElementById('menuButton');
+const menuClose = document.getElementById('menuClose');
+const sideMenu = document.getElementById('sideMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+
+function abrirMenu() {
+    sideMenu.classList.add('active');
+    menuOverlay.classList.add('active');
+    menuButton.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+}
+
+function fecharMenu() {
+    sideMenu.classList.remove('active');
+    menuOverlay.classList.remove('active');
+    menuButton.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+}
+
+menuButton.addEventListener('click', abrirMenu);
+menuClose.addEventListener('click', fecharMenu);
+menuOverlay.addEventListener('click', fecharMenu);
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        fecharMenu();
+    }
+});
 </script>
 
 </body>
