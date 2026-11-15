@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+
+<title>Criar conta | LowticketPay</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #080808;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 430px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.logo-icon {
+    width: 46px;
+    height: 46px;
+    background: #f5c400;
+    color: #080808;
+    border-radius: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.logo h1 {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo h1 span {
+    color: #f5c400;
+}
+
+.logo p {
+    color: #777;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.card {
+    background: #111;
+    border: 1px solid #252525;
+    border-radius: 18px;
+    padding: 28px 24px;
+}
+
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.field {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.input-wrap {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #303030;
+    background: #090909;
+    border-radius: 9px;
+    padding: 0 14px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #f5c400;
+}
+
+input::placeholder {
+    color: #555;
+}
+
+.password-input {
+    padding-right: 75px;
+}
+
+.toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.help {
+    font-size: 10px;
+    color: #777;
+    margin-top: 7px;
+}
+
+.register-btn {
+    width: 100%;
+    height: 49px;
+    background: #f5c400;
+    color: #080808;
+    border: none;
+    border-radius: 9px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 7px;
+    transition: .2s;
+}
+
+.register-btn:hover {
+    background: #ffda35;
+}
+
+.register-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.message {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 17px;
+    line-height: 1.5;
+}
+
+.message.error {
+    display: block;
+    background: #351616;
+    color: #ff8585;
+}
+
+.message.success {
+    display: block;
+    background: #16351f;
+    color: #80e69b;
+}
+
+.login {
+    text-align: center;
+    margin-top: 22px;
+    color: #888;
+    font-size: 12px;
+}
+
+.login a {
+    color: #f5c400;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.footer {
+    text-align: center;
+    color: #555;
+    font-size: 10px;
+    margin-top: 25px;
+}
+
+@media(max-width: 380px) {
+    .card {
+        padding: 23px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <div class="logo-icon">L</div>
+        <h1>Lowticket<span>Pay</span></h1>
+        <p>Crie a sua conta e comece a vender</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Criar uma conta</h2>
+
+        <p class="subtitle">
+            Preencha os seus dados para começar a utilizar a LowticketPay.
+        </p>
+
+        <div id="message" class="message" role="alert" aria-live="polite"></div>
+
+        <form id="registerForm">
+
+            <div class="field">
+                <label for="name">Nome completo</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="O seu nome"
+                    autocomplete="name"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="email">E-mail</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="seuemail@exemplo.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="password">Palavra-passe</label>
+
+                <div class="input-wrap">
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="password-input"
+                        placeholder="Crie uma palavra-passe"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle"
+                        id="togglePassword"
+                    >
+                        Mostrar
+                    </button>
+
+                </div>
+
+                <p class="help">
+                    Mínimo de 6 caracteres.
+                </p>
+            </div>
+
+            <div class="field">
+                <label for="confirmPassword">Confirmar palavra-passe</label>
+
+                <div class="input-wrap">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        class="password-input"
+                        placeholder="Repita a palavra-passe"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle"
+                        id="toggleConfirm"
+                    >
+                        Mostrar
+                    </button>
+
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                class="register-btn"
+                id="registerBtn"
+            >
+                Criar minha conta
+            </button>
+
+        </form>
+
+        <div class="login">
+            Já tem uma conta?
+            <a href="index.html">Entrar</a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2026 LowticketPay. Todos os direitos reservados.
+    </div>
+
+</div>
+
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+
+import {
+    createUserWithEmailAndPassword,
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+
+import {
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+
+const form = document.getElementById("registerForm");
+
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const confirmInput = document.getElementById("confirmPassword");
+
+const registerBtn = document.getElementById("registerBtn");
+const message = document.getElementById("message");
+
+let submitting = false;
+
+
+/* MENSAGENS */
+
+function showMessage(text, type = "error") {
+    message.textContent = text;
+    message.className = "message " + type;
+}
+
+
+function translateError(error) {
+
+    const errors = {
+
+        "auth/email-already-in-use":
+            "Este e-mail já está registado. Entre na sua conta.",
+
+        "auth/invalid-email":
+            "O e-mail introduzido é inválido.",
+
+        "auth/weak-password":
+            "A palavra-passe é demasiado fraca.",
+
+        "auth/network-request-failed":
+            "Erro de ligação. Verifique a internet.",
+
+        "auth/operation-not-allowed":
+            "O registo por e-mail não está activado no Firebase.",
+
+        "auth/too-many-requests":
+            "Demasiadas tentativas. Tente novamente mais tarde."
+    };
+
+    return errors[error.code] ||
+        "Não foi possível criar a conta. Tente novamente.";
+}
+
+
+/* MOSTRAR / OCULTAR PALAVRAS-PASSE */
+
+document.getElementById("togglePassword").addEventListener("click", () => {
+
+    const visible = passwordInput.type === "text";
+
+    passwordInput.type = visible ? "password" : "text";
+
+    document.getElementById("togglePassword").textContent =
+        visible ? "Mostrar" : "Ocultar";
+
+});
+
+
+document.getElementById("toggleConfirm").addEventListener("click", () => {
+
+    const visible = confirmInput.type === "text";
+
+    confirmInput.type = visible ? "password" : "text";
+
+    document.getElementById("toggleConfirm").textContent =
+        visible ? "Mostrar" : "Ocultar";
+
+});
+
+
+/* CRIAR CONTA */
+
+form.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    if (submitting) return;
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
+    const confirmPassword = confirmInput.value;
+
+
+    /* VALIDAR CAMPOS */
+
+    if (!name || !email || !password || !confirmPassword) {
+        showMessage("Preencha todos os campos.");
+        return;
+    }
+
+    if (name.length < 2) {
+        showMessage("Introduza um nome válido.");
+        return;
+    }
+
+    if (password.length < 6) {
+        showMessage("A palavra-passe deve ter pelo menos 6 caracteres.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        showMessage("As palavras-passe não coincidem.");
+        return;
+    }
+
+
+    submitting = true;
+
+    registerBtn.disabled = true;
+    registerBtn.textContent = "A criar conta...";
+
+    message.className = "message";
+
+
+    let createdUser = null;
+
+
+    try {
+
+        /* 1. CRIAR CONTA NO FIREBASE AUTHENTICATION */
+
+        const credential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        createdUser = credential.user;
+
+
+        /* 2. ACTUALIZAR NOME DO UTILIZADOR */
+
+        await updateProfile(createdUser, {
+            displayName: name
+        });
+
+
+        /* 3. GUARDAR PERFIL NO FIRESTORE */
+
+        await setDoc(
+            doc(db, "usuarios", createdUser.uid),
+            {
+                uid: createdUser.uid,
+                nome: name,
+                email: email,
+                createdAt: serverTimestamp()
+            }
+        );
+
+
+        /* 4. CONFIRMAR REGISTO */
+
+        showMessage(
+            "Conta criada com sucesso! A abrir o painel...",
+            "success"
+        );
+
+        window.location.replace("dashboard.html");
+
+
+    } catch (error) {
+
+        console.error("Erro no registo:", error);
+
+
+        if (createdUser) {
+
+            showMessage(
+                "A conta foi criada no Authentication, mas ocorreu um erro ao guardar o perfil no Firestore. Não crie outra conta. Entre com o mesmo e-mail e verifique as regras do Firestore.",
+                "error"
+            );
+
+        } else {
+
+            showMessage(translateError(error));
+
+        }
+
+        submitting = false;
+
+        registerBtn.disabled = false;
+        registerBtn.textContent = "Criar minha conta";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
