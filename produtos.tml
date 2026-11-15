@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#030a12">
 <title>LowticketPay - Produtos</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -20,157 +22,618 @@
     --green:#70df39;
     --red:#ff5555;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.layout{display:flex;min-height:100vh}
 
-.sidebar{
-    width:245px;background:#07111c;border-right:1px solid var(--border);
-    padding:25px 17px;display:flex;flex-direction:column;
-    position:fixed;inset:0 auto 0 0;z-index:20;transition:transform .25s ease
+* {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
-.logo{display:flex;align-items:center;gap:10px;padding:0 10px;margin-bottom:42px}
-.logo-icon{
-    width:37px;height:37px;background:var(--green);color:#06110a;
-    border-radius:10px;display:grid;place-items:center;font-size:21px;font-weight:800
-}
-.logo-name{font-size:19px;font-weight:800;letter-spacing:-.7px}
-.logo-name span{color:var(--green)}
-.menu-label{color:#657587;font-size:10px;font-weight:800;letter-spacing:1.3px;padding:0 12px;margin-bottom:13px}
-.menu{display:flex;flex-direction:column;gap:7px}
-.menu a,.sidebar-bottom a{
-    text-decoration:none;color:#9aabba;padding:13px 12px;border-radius:9px;
-    display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;transition:.2s
-}
-.menu a:hover,.menu a.active,.sidebar-bottom a:hover{color:var(--blue);background:#102333}
-.menu-icon{width:19px;text-align:center;font-size:17px}
-.sidebar-bottom{margin-top:auto;display:flex;flex-direction:column;gap:7px}
-.sidebar-bottom a{padding:12px;font-size:13px}
 
-.main{width:calc(100% - 245px);margin-left:245px;padding:30px 35px 50px}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
-.topbar-left{display:flex;align-items:center;gap:12px}
-.page-title{font-size:23px;font-weight:800;letter-spacing:-.7px}
-.page-subtitle{color:var(--muted);font-size:12px;margin-top:6px}
-.user-circle{
-    width:37px;height:37px;border-radius:50%;background:#142638;color:var(--blue);
-    display:grid;place-items:center;font-weight:800;font-size:13px
+body {
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
 }
-.mobile-menu{display:none;border:0;background:transparent;color:white;font-size:23px}
 
-.content-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}
-.content-header h2{font-size:17px;font-weight:800}
-.content-header p{color:var(--muted);font-size:11px;margin-top:5px}
-.primary-btn{
-    border:0;background:var(--green);color:#071109;padding:12px 17px;border-radius:8px;
-    font-size:12px;font-weight:800;display:flex;align-items:center;gap:7px
+button,input,textarea,select {
+    font:inherit;
 }
-.primary-btn:hover{filter:brightness(1.08)}
-.search-box{width:100%;max-width:420px;position:relative;margin-bottom:23px}
-.search-box input{
-    width:100%;height:43px;padding:0 15px 0 40px;background:var(--card);
-    border:1px solid var(--border);color:white;border-radius:8px;outline:none;font-size:12px
-}
-.search-box input:focus{border-color:var(--blue)}
-.search-icon{position:absolute;left:14px;top:12px;color:var(--muted);font-size:15px}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:17px}
-.product-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:0}
-.product-image{
-    width:100%;height:155px;background:#101d2a;display:flex;align-items:center;
-    justify-content:center;overflow:hidden;color:#617487;font-size:32px
-}
-.product-image img{width:100%;height:100%;object-fit:cover}
-.product-info{padding:15px}
-.product-category{
-    display:inline-block;color:var(--blue);background:#102536;padding:5px 8px;
-    border-radius:5px;font-size:9px;font-weight:800;margin-bottom:10px
-}
-.product-name{font-size:14px;font-weight:800;margin-bottom:7px;overflow-wrap:anywhere}
-.product-description{font-size:11px;color:var(--muted);line-height:1.6;min-height:35px;overflow-wrap:anywhere}
-.product-price{color:var(--green);font-size:17px;font-weight:800;margin-top:13px}
-.product-actions{display:flex;gap:8px;margin-top:15px}
-.action-btn{
-    flex:1;padding:9px 5px;border-radius:7px;border:1px solid var(--border);
-    background:var(--card2);color:#c6d2dd;font-size:10px;font-weight:700
-}
-.action-btn:hover{border-color:var(--blue);color:var(--blue)}
-.action-btn.delete:hover{border-color:var(--red);color:var(--red)}
-.empty-state{
-    grid-column:1/-1;padding:55px 20px;text-align:center;background:var(--card);
-    border:1px dashed var(--border);border-radius:12px
-}
-.empty-icon{font-size:35px;margin-bottom:12px}
-.empty-state h3{font-size:14px;margin-bottom:7px}
-.empty-state p{color:var(--muted);font-size:11px}
 
-.modal-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,.76);z-index:100;
-    display:none;align-items:center;justify-content:center;padding:18px
+button {
+    cursor:pointer;
 }
-.modal-overlay.show{display:flex}
-.modal{
-    width:100%;max-width:520px;max-height:92vh;overflow-y:auto;background:#0b1521;
-    border:1px solid var(--border);border-radius:13px;padding:23px
-}
-.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.modal-header h2{font-size:17px;font-weight:800}
-.close-btn{background:transparent;color:#a8b5c2;border:0;font-size:24px}
-.form-group{margin-bottom:16px}
-.form-group label{display:block;font-size:11px;color:#c3ced9;font-weight:700;margin-bottom:8px}
-.form-group input,.form-group textarea,.form-group select{
-    width:100%;background:#07111c;color:white;border:1px solid var(--border);
-    border-radius:8px;padding:12px;outline:none;font-size:12px
-}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--blue)}
-.form-group textarea{min-height:90px;resize:vertical;line-height:1.5}
-.form-group select option{background:#07111c}
-.file-input{padding:11px!important;border-style:dashed!important}
-.file-help{display:block;color:var(--muted);font-size:10px;margin-top:7px;line-height:1.5}
-.file-name{display:block;color:var(--green);font-size:10px;margin-top:6px;overflow-wrap:anywhere}
-.modal-actions{display:flex;gap:10px;margin-top:22px}
-.cancel-btn,.save-btn{flex:1;padding:13px;border-radius:8px;font-size:11px;font-weight:800}
-.cancel-btn{background:#152231;border:1px solid var(--border);color:#c5d0db}
-.save-btn{background:var(--green);border:0;color:#061108}
-.save-btn:disabled{opacity:.55;cursor:not-allowed}
-.status-message{
-    display:none;margin-bottom:15px;padding:11px;border-radius:7px;
-    font-size:11px;line-height:1.5
-}
-.status-message.show{display:block}
-.status-message.error{color:#ff8d8d;background:#351719;border:1px solid #61282b}
-.status-message.success{color:#a9f58a;background:#14291a;border:1px solid #285334}
 
-@media(max-width:850px){
-    .sidebar{transform:translateX(-100%)}
-    .sidebar.open{transform:translateX(0)}
-    .main{width:100%;margin-left:0;padding:22px 17px 40px}
-    .mobile-menu{display:block}
-    .topbar{margin-bottom:27px}
+.layout {
+    display:flex;
+    min-height:100vh;
 }
-@media(max-width:520px){
-    .page-title{font-size:19px}
-    .content-header{align-items:flex-start}
-    .content-header h2{font-size:15px}
-    .primary-btn{padding:11px 12px;font-size:10px;white-space:nowrap}
-    .products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .product-image{height:115px}
-    .product-info{padding:11px}
-    .product-name{font-size:12px}
-    .product-description{font-size:10px}
-    .product-price{font-size:14px}
-    .product-actions{gap:5px}
-    .action-btn{font-size:9px;padding:8px 3px}
-    .modal{padding:18px}
+
+.sidebar {
+    width:245px;
+    background:#07111c;
+    border-right:1px solid var(--border);
+    padding:25px 17px;
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    inset:0 auto 0 0;
+    z-index:20;
+    transition:transform .25s ease;
+}
+
+.logo {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 10px;
+    margin-bottom:42px;
+}
+
+.logo-icon {
+    width:37px;
+    height:37px;
+    background:var(--green);
+    color:#06110a;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    font-size:21px;
+    font-weight:800;
+}
+
+.logo-name {
+    font-size:19px;
+    font-weight:800;
+    letter-spacing:-.7px;
+}
+
+.logo-name span {
+    color:var(--green);
+}
+
+.menu-label {
+    color:#657587;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.3px;
+    padding:0 12px;
+    margin-bottom:13px;
+}
+
+.menu {
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.menu a,.sidebar-bottom a {
+    text-decoration:none;
+    color:#9aabba;
+    padding:13px 12px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:13px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.menu a:hover,.menu a.active,.sidebar-bottom a:hover {
+    color:var(--blue);
+    background:#102333;
+}
+
+.menu-icon {
+    width:19px;
+    text-align:center;
+    font-size:17px;
+}
+
+.sidebar-bottom {
+    margin-top:auto;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.sidebar-bottom a {
+    padding:12px;
+    font-size:13px;
+}
+
+.main {
+    width:calc(100% - 245px);
+    margin-left:245px;
+    padding:30px 35px 50px;
+}
+
+.topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:34px;
+}
+
+.topbar-left {
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.page-title {
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:-.7px;
+}
+
+.page-subtitle {
+    color:var(--muted);
+    font-size:12px;
+    margin-top:6px;
+}
+
+.user-circle {
+    width:37px;
+    height:37px;
+    border-radius:50%;
+    background:#142638;
+    color:var(--blue);
+    display:grid;
+    place-items:center;
+    font-weight:800;
+    font-size:13px;
+}
+
+.mobile-menu {
+    display:none;
+    border:0;
+    background:transparent;
+    color:white;
+    font-size:23px;
+}
+
+.content-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.content-header h2 {
+    font-size:17px;
+    font-weight:800;
+}
+
+.content-header p {
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+.primary-btn {
+    border:0;
+    background:var(--green);
+    color:#071109;
+    padding:12px 17px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.primary-btn:hover {
+    filter:brightness(1.08);
+}
+
+.search-box {
+    width:100%;
+    max-width:420px;
+    position:relative;
+    margin-bottom:23px;
+}
+
+.search-box input {
+    width:100%;
+    height:43px;
+    padding:0 15px 0 40px;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:white;
+    border-radius:8px;
+    outline:none;
+    font-size:12px;
+}
+
+.search-box input:focus {
+    border-color:var(--blue);
+}
+
+.search-icon {
+    position:absolute;
+    left:14px;
+    top:12px;
+    color:var(--muted);
+    font-size:15px;
+}
+
+.products-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:17px;
+}
+
+.product-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    min-width:0;
+}
+
+.product-image {
+    width:100%;
+    height:155px;
+    background:#101d2a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    color:#617487;
+    font-size:32px;
+}
+
+.product-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-info {
+    padding:15px;
+}
+
+.product-category {
+    display:inline-block;
+    color:var(--blue);
+    background:#102536;
+    padding:5px 8px;
+    border-radius:5px;
+    font-size:9px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.product-name {
+    font-size:14px;
+    font-weight:800;
+    margin-bottom:7px;
+    overflow-wrap:anywhere;
+}
+
+.product-description {
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.6;
+    min-height:35px;
+    overflow-wrap:anywhere;
+}
+
+.product-price {
+    color:var(--green);
+    font-size:17px;
+    font-weight:800;
+    margin-top:13px;
+}
+
+.product-actions {
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.action-btn {
+    flex:1;
+    padding:9px 5px;
+    border-radius:7px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:#c6d2dd;
+    font-size:10px;
+    font-weight:700;
+}
+
+.action-btn:hover {
+    border-color:var(--blue);
+    color:var(--blue);
+}
+
+.action-btn.delete:hover {
+    border-color:var(--red);
+    color:var(--red);
+}
+
+.empty-state {
+    grid-column:1/-1;
+    padding:55px 20px;
+    text-align:center;
+    background:var(--card);
+    border:1px dashed var(--border);
+    border-radius:12px;
+}
+
+.empty-icon {
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+.empty-state h3 {
+    font-size:14px;
+    margin-bottom:7px;
+}
+
+.empty-state p {
+    color:var(--muted);
+    font-size:11px;
+}
+
+.modal-overlay {
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.76);
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.modal-overlay.show {
+    display:flex;
+}
+
+.modal {
+    width:100%;
+    max-width:520px;
+    max-height:92vh;
+    overflow-y:auto;
+    background:#0b1521;
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:23px;
+}
+
+.modal-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:22px;
+}
+
+.modal-header h2 {
+    font-size:17px;
+    font-weight:800;
+}
+
+.close-btn {
+    background:transparent;
+    color:#a8b5c2;
+    border:0;
+    font-size:24px;
+}
+
+.form-group {
+    margin-bottom:16px;
+}
+
+.form-group label {
+    display:block;
+    font-size:11px;
+    color:#c3ced9;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width:100%;
+    background:#07111c;
+    color:white;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:12px;
+    outline:none;
+    font-size:12px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color:var(--blue);
+}
+
+.form-group textarea {
+    min-height:90px;
+    resize:vertical;
+    line-height:1.5;
+}
+
+.form-group select option {
+    background:#07111c;
+}
+
+.file-input {
+    padding:11px!important;
+    border-style:dashed!important;
+}
+
+.file-help {
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-top:7px;
+    line-height:1.5;
+}
+
+.file-name {
+    display:block;
+    color:var(--green);
+    font-size:10px;
+    margin-top:6px;
+    overflow-wrap:anywhere;
+}
+
+.modal-actions {
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+.cancel-btn,.save-btn {
+    flex:1;
+    padding:13px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.cancel-btn {
+    background:#152231;
+    border:1px solid var(--border);
+    color:#c5d0db;
+}
+
+.save-btn {
+    background:var(--green);
+    border:0;
+    color:#061108;
+}
+
+.save-btn:disabled {
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.status-message {
+    display:none;
+    margin-bottom:15px;
+    padding:11px;
+    border-radius:7px;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.status-message.show {
+    display:block;
+}
+
+.status-message.error {
+    color:#ff8d8d;
+    background:#351719;
+    border:1px solid #61282b;
+}
+
+.status-message.success {
+    color:#a9f58a;
+    background:#14291a;
+    border:1px solid #285334;
+}
+
+@media(max-width:850px) {
+    .sidebar {
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform:translateX(0);
+    }
+
+    .main {
+        width:100%;
+        margin-left:0;
+        padding:22px 17px 40px;
+    }
+
+    .mobile-menu {
+        display:block;
+    }
+
+    .topbar {
+        margin-bottom:27px;
+    }
+}
+
+@media(max-width:520px) {
+    .page-title {
+        font-size:19px;
+    }
+
+    .content-header {
+        align-items:flex-start;
+    }
+
+    .content-header h2 {
+        font-size:15px;
+    }
+
+    .primary-btn {
+        padding:11px 12px;
+        font-size:10px;
+        white-space:nowrap;
+    }
+
+    .products-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+    }
+
+    .product-image {
+        height:115px;
+    }
+
+    .product-info {
+        padding:11px;
+    }
+
+    .product-name {
+        font-size:12px;
+    }
+
+    .product-description {
+        font-size:10px;
+    }
+
+    .product-price {
+        font-size:14px;
+    }
+
+    .product-actions {
+        gap:5px;
+    }
+
+    .action-btn {
+        font-size:9px;
+        padding:8px 3px;
+    }
+
+    .modal {
+        padding:18px;
+    }
 }
 </style>
 </head>
 
 <body>
+
 <div class="layout">
 
 <aside class="sidebar" id="sidebar">
+
     <div class="logo">
         <div class="logo-icon">L</div>
         <div class="logo-name">Lowticket<span>Pay</span></div>
@@ -179,128 +642,243 @@ button{cursor:pointer}
     <div class="menu-label">MENU PRINCIPAL</div>
 
     <nav class="menu">
-        <a href="dashboard.html"><span class="menu-icon">▦</span>Dashboard</a>
-        <a href="produtos.html" class="active"><span class="menu-icon">▣</span>Produtos</a>
-        <a href="vitrine.html"><span class="menu-icon">◫</span>Vitrine</a>
-        <a href="financeiro.html"><span class="menu-icon">◷</span>Financeiro</a>
+        <a href="dashboard.html">
+            <span class="menu-icon">▦</span>Dashboard
+        </a>
+
+        <a href="produtos.html" class="active">
+            <span class="menu-icon">▣</span>Produtos
+        </a>
+
+        <a href="vitrine.html">
+            <span class="menu-icon">◫</span>Vitrine
+        </a>
+
+        <a href="financeiro.html">
+            <span class="menu-icon">◷</span>Financeiro
+        </a>
     </nav>
 
     <div class="sidebar-bottom">
-        <a href="#" id="supportLink"><span class="menu-icon">◉</span>Suporte</a>
-        <a href="#" id="logoutLink"><span class="menu-icon">⇥</span>Sair</a>
+        <a href="#" id="supportLink">
+            <span class="menu-icon">◉</span>Suporte
+        </a>
+
+        <a href="#" id="logoutLink">
+            <span class="menu-icon">⇥</span>Sair
+        </a>
     </div>
+
 </aside>
 
+
 <main class="main">
+
     <header class="topbar">
+
         <div class="topbar-left">
             <button class="mobile-menu" id="mobileMenu">☰</button>
+
             <div>
                 <h1 class="page-title">Produtos</h1>
                 <p class="page-subtitle">Gerencie os seus infoprodutos.</p>
             </div>
         </div>
+
         <div class="topbar-right">
             <div class="user-circle" id="userInitial">U</div>
         </div>
+
     </header>
 
+
     <section>
+
         <div class="content-header">
+
             <div>
                 <h2>Os meus produtos</h2>
                 <p>Cadastre e organize os seus produtos digitais.</p>
             </div>
-            <button class="primary-btn" id="openModal"><span>＋</span>Adicionar</button>
+
+            <button class="primary-btn" id="openModal">
+                <span>＋</span>Adicionar
+            </button>
+
         </div>
+
 
         <div class="search-box">
             <span class="search-icon">⌕</span>
-            <input type="search" id="searchInput" placeholder="Pesquisar produto...">
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Pesquisar produto..."
+            >
         </div>
 
+
         <div id="productsContainer" class="products-grid">
+
             <div class="empty-state">
                 <div class="empty-icon">▣</div>
                 <h3>A carregar produtos...</h3>
             </div>
+
         </div>
+
     </section>
+
 </main>
 </div>
 
+
+<!-- MODAL DE PRODUTO -->
+
 <div class="modal-overlay" id="productModal">
-<div class="modal">
-    <div class="modal-header">
-        <h2 id="modalTitle">Adicionar produto</h2>
-        <button class="close-btn" id="closeModal">×</button>
+
+    <div class="modal">
+
+        <div class="modal-header">
+            <h2 id="modalTitle">Adicionar produto</h2>
+            <button class="close-btn" id="closeModal">×</button>
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <form id="productForm">
+
+            <div class="form-group">
+                <label for="productName">Nome do produto</label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="Ex.: Curso de Marketing Digital"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="productDescription">Descrição</label>
+
+                <textarea
+                    id="productDescription"
+                    placeholder="Escreva uma descrição para o produto..."
+                    maxlength="1000"
+                    required
+                ></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label for="productPrice">Preço (MT)</label>
+
+                <input
+                    type="number"
+                    id="productPrice"
+                    placeholder="Ex.: 250"
+                    min="1"
+                    step="0.01"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="productCategory">Categoria</label>
+
+                <select id="productCategory" required>
+                    <option value="">Selecionar categoria</option>
+                    <option value="Ebook">Ebook</option>
+                    <option value="Curso online">Curso online</option>
+                    <option value="Software">Software</option>
+                    <option value="Templates">Templates</option>
+                    <option value="Áudio">Áudio</option>
+                    <option value="Vídeo aula">Vídeo aula</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="productImage">Imagem de capa</label>
+
+                <input
+                    class="file-input"
+                    type="file"
+                    id="productImage"
+                    accept="image/jpeg,image/png,image/webp"
+                >
+
+                <span class="file-help">
+                    JPG, PNG ou WEBP. Máximo de 3 MB.
+                    Obrigatória no cadastro.
+                </span>
+
+                <span class="file-name" id="imageFileName"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="productPDF">PDF do produto</label>
+
+                <input
+                    class="file-input"
+                    type="file"
+                    id="productPDF"
+                    accept="application/pdf,.pdf"
+                >
+
+                <span class="file-help">
+                    Apenas PDF. Máximo de 3 MB.
+                    Obrigatório no cadastro.
+                </span>
+
+                <span class="file-name" id="pdfFileName"></span>
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    id="cancelModal"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                    id="saveButton"
+                >
+                    Guardar produto
+                </button>
+
+            </div>
+
+        </form>
+
     </div>
-
-    <div id="statusMessage" class="status-message"></div>
-
-    <form id="productForm">
-        <div class="form-group">
-            <label for="productName">Nome do produto</label>
-            <input type="text" id="productName" placeholder="Ex.: Curso de Marketing Digital" maxlength="100" required>
-        </div>
-
-        <div class="form-group">
-            <label for="productDescription">Descrição</label>
-            <textarea id="productDescription" placeholder="Escreva uma descrição para o produto..." maxlength="1000" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="productPrice">Preço (MT)</label>
-            <input type="number" id="productPrice" placeholder="Ex.: 250" min="1" step="0.01" required>
-        </div>
-
-        <div class="form-group">
-            <label for="productCategory">Categoria</label>
-            <select id="productCategory" required>
-                <option value="">Selecionar categoria</option>
-                <option value="Ebook">Ebook</option>
-                <option value="Curso online">Curso online</option>
-                <option value="Software">Software</option>
-                <option value="Templates">Templates</option>
-                <option value="Áudio">Áudio</option>
-                <option value="Vídeo aula">Vídeo aula</option>
-                <option value="Outros">Outros</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="productImage">Imagem de capa</label>
-            <input class="file-input" type="file" id="productImage" accept="image/jpeg,image/png,image/webp">
-            <span class="file-help">JPG, PNG ou WEBP. Máximo de 3 MB. Obrigatória no cadastro.</span>
-            <span class="file-name" id="imageFileName"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="productPDF">PDF do produto</label>
-            <input class="file-input" type="file" id="productPDF" accept="application/pdf,.pdf">
-            <span class="file-help">Apenas PDF. Máximo de 3 MB. Obrigatório no cadastro.</span>
-            <span class="file-name" id="pdfFileName"></span>
-        </div>
-
-        <div class="modal-actions">
-            <button type="button" class="cancel-btn" id="cancelModal">Cancelar</button>
-            <button type="submit" class="save-btn" id="saveButton">Guardar produto</button>
-        </div>
-    </form>
 </div>
-</div>
+
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+/* FIREBASE */
+
+import { auth, db } from "./js/firebase.js";
 
 import {
-    getAuth,
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
 import {
-    getFirestore,
     collection,
     addDoc,
     updateDoc,
@@ -313,23 +891,7 @@ import {
     getDoc,
     setDoc,
     deleteField
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-/* FIREBASE - PROJETO PRODUTIVA */
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCjBar-is1b9vqeaTfaGkICeojtNF0z1cw",
-    authDomain: "produtiva-89d7d.firebaseapp.com",
-    projectId: "produtiva-89d7d",
-    storageBucket: "produtiva-89d7d.firebasestorage.app",
-    messagingSenderId: "237663641410",
-    appId: "1:237663641410:web:28704ab8560c98922272db"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
 
 /* ELEMENTOS */
@@ -347,103 +909,131 @@ let currentUser = null;
 let editingProductId = null;
 let products = [];
 let unsubscribeProducts = null;
+let submitting = false;
 
 
 /* AUXILIARES */
 
 function escapeHTML(value) {
     return String(value ?? "").replace(/[&<>"']/g, character => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
     })[character]);
 }
 
-function showMessage(message,type="error") {
-    statusMessage.textContent=message;
-    statusMessage.className=`status-message show ${type}`;
+
+function showMessage(message, type = "error") {
+    statusMessage.textContent = message;
+    statusMessage.className = `status-message show ${type}`;
 }
+
 
 function hideMessage() {
-    statusMessage.textContent="";
-    statusMessage.className="status-message";
+    statusMessage.textContent = "";
+    statusMessage.className = "status-message";
 }
 
+
 function formatPrice(price) {
-    return Number(price||0).toLocaleString("pt-MZ",{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-    })+" MT";
+    return Number(price || 0).toLocaleString("pt-MZ", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }) + " MT";
 }
+
 
 function openModal() {
     modal.classList.add("show");
 }
 
+
 function resetForm() {
     form.reset();
-    editingProductId=null;
-    document.getElementById("modalTitle").textContent="Adicionar produto";
-    document.getElementById("imageFileName").textContent="";
-    document.getElementById("pdfFileName").textContent="";
-    saveButton.textContent="Guardar produto";
-    saveButton.disabled=false;
+
+    editingProductId = null;
+    submitting = false;
+
+    document.getElementById("modalTitle").textContent = "Adicionar produto";
+    document.getElementById("imageFileName").textContent = "";
+    document.getElementById("pdfFileName").textContent = "";
+
+    saveButton.textContent = "Guardar produto";
+    saveButton.disabled = false;
+
     hideMessage();
 }
 
+
 function closeModal() {
+    if (submitting) return;
+
     modal.classList.remove("show");
     resetForm();
 }
 
-function validateFile(file,kind) {
-    if(!file)return;
 
-    if(file.size>3*1024*1024) {
+/* VALIDAR FICHEIROS */
+
+function validateFile(file, kind) {
+    if (!file) return;
+
+    if (file.size > 3 * 1024 * 1024) {
         throw new Error("O ficheiro não pode ultrapassar 3 MB.");
     }
 
-    if(kind==="image"&&!["image/jpeg","image/png","image/webp"].includes(file.type)) {
-        throw new Error("Seleciona uma imagem JPG, PNG ou WEBP.");
+    if (
+        kind === "image" &&
+        !["image/jpeg", "image/png", "image/webp"].includes(file.type)
+    ) {
+        throw new Error("Selecciona uma imagem JPG, PNG ou WEBP.");
     }
 
-    if(kind==="pdf"&&file.type!=="application/pdf") {
-        throw new Error("Seleciona um ficheiro PDF válido.");
+    if (kind === "pdf" && file.type !== "application/pdf") {
+        throw new Error("Selecciona um ficheiro PDF válido.");
     }
 }
 
 
-/* UPLOAD PARA O BACKEND MEGA */
+/* UPLOAD PARA O MEGA */
 
-async function uploadFile(file,kind) {
-    if(!currentUser)throw new Error("A sessão não está autenticada.");
+async function uploadFile(file, kind) {
 
-    validateFile(file,kind);
+    if (!currentUser) {
+        throw new Error("A sessão não está autenticada.");
+    }
 
-    const token=await currentUser.getIdToken();
-    const formData=new FormData();
+    validateFile(file, kind);
 
-    formData.append("file",file);
-    formData.append("kind",kind);
+    const token = await currentUser.getIdToken();
 
-    const response=await fetch("/api/upload",{
-        method:"POST",
-        headers:{Authorization:"Bearer "+token},
-        body:formData
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("kind", kind);
+
+    const response = await fetch("/api/upload", {
+        method: "POST",
+        headers: {
+            Authorization: "Bearer " + token
+        },
+        body: formData
     });
 
     let data;
 
     try {
-        data=await response.json();
+        data = await response.json();
     } catch {
-        throw new Error("Resposta inválida do servidor.");
+        throw new Error("O servidor devolveu uma resposta inválida.");
     }
 
-    if(!response.ok||!data.success||!data.fileId) {
-        throw new Error(data.message||"Não foi possível enviar o ficheiro.");
+    if (!response.ok || !data.success || !data.fileId) {
+        throw new Error(
+            data.message || "Não foi possível enviar o ficheiro."
+        );
     }
 
     return data.fileId;
@@ -453,143 +1043,201 @@ async function uploadFile(file,kind) {
 /* DADOS DO FORMULÁRIO */
 
 function getProductData() {
-    const name=document.getElementById("productName").value.trim();
-    const description=document.getElementById("productDescription").value.trim();
-    const price=Number(document.getElementById("productPrice").value);
-    const category=document.getElementById("productCategory").value;
 
-    if(!name||!description||!category) {
+    const name = document.getElementById("productName").value.trim();
+
+    const description = document.getElementById("productDescription").value.trim();
+
+    const price = Number(document.getElementById("productPrice").value);
+
+    const category = document.getElementById("productCategory").value;
+
+    if (!name || !description || !category) {
         throw new Error("Preenche todos os campos obrigatórios.");
     }
 
-    if(!Number.isFinite(price)||price<=0) {
+    if (!Number.isFinite(price) || price <= 0) {
         throw new Error("Introduz um preço válido.");
     }
 
-    return {name,description,price,category};
+    return {
+        name,
+        description,
+        price,
+        category
+    };
 }
 
 
-/* CRIAR PRODUTO
-   Dados públicos: produtos/{id}
-   PDF privado: privateProductFiles/{id}
-*/
+/* CRIAR PRODUTO */
 
 async function createProduct(productData) {
-    const imageFile=imageInput.files[0];
-    const pdfFile=pdfInput.files[0];
 
-    if(!imageFile)throw new Error("Seleciona a imagem de capa.");
-    if(!pdfFile)throw new Error("Seleciona o PDF do produto.");
+    const imageFile = imageInput.files[0];
+    const pdfFile = pdfInput.files[0];
 
-    validateFile(imageFile,"image");
-    validateFile(pdfFile,"pdf");
+    if (!imageFile) {
+        throw new Error("Selecciona a imagem de capa.");
+    }
 
-    showMessage("A enviar imagem...","success");
-    const imageFileId=await uploadFile(imageFile,"image");
+    if (!pdfFile) {
+        throw new Error("Selecciona o PDF do produto.");
+    }
 
-    showMessage("A enviar PDF...","success");
-    const pdfFileId=await uploadFile(pdfFile,"pdf");
+    validateFile(imageFile, "image");
+    validateFile(pdfFile, "pdf");
 
-    showMessage("A guardar produto...","success");
+    showMessage("A enviar imagem...", "success");
 
-    const productRef=await addDoc(collection(db,"produtos"),{
+    const imageFileId = await uploadFile(imageFile, "image");
+
+    showMessage("A enviar PDF...", "success");
+
+    const pdfFileId = await uploadFile(pdfFile, "pdf");
+
+    showMessage("A guardar produto...", "success");
+
+    const productRef = await addDoc(collection(db, "produtos"), {
+
         ...productData,
-        ownerId:currentUser.uid,
+
+        ownerId: currentUser.uid,
+
         imageFileId,
-        createdAt:serverTimestamp(),
-        updatedAt:serverTimestamp()
+
+        createdAt: serverTimestamp(),
+
+        updatedAt: serverTimestamp()
+
     });
 
     try {
-        await setDoc(doc(db,"privateProductFiles",productRef.id),{
-            ownerId:currentUser.uid,
+
+        await setDoc(doc(db, "privateProductFiles", productRef.id), {
+
+            ownerId: currentUser.uid,
+
             pdfFileId,
-            createdAt:serverTimestamp(),
-            updatedAt:serverTimestamp()
+
+            createdAt: serverTimestamp(),
+
+            updatedAt: serverTimestamp()
+
         });
-    } catch(error) {
+
+    } catch (error) {
+
         await deleteDoc(productRef);
+
         throw error;
     }
 }
 
 
-/* EDITAR E MIGRAR PRODUTOS ANTIGOS */
+/* EDITAR PRODUTO */
 
 async function updateProduct(product) {
-    const imageFile=imageInput.files[0];
-    const pdfFile=pdfInput.files[0];
 
-    let imageFileId=product.imageFileId||null;
+    const imageFile = imageInput.files[0];
+    const pdfFile = pdfInput.files[0];
 
-    if(imageFile) {
-        validateFile(imageFile,"image");
-        showMessage("A atualizar imagem...","success");
-        imageFileId=await uploadFile(imageFile,"image");
+    let imageFileId = product.imageFileId || null;
+
+    if (imageFile) {
+
+        validateFile(imageFile, "image");
+
+        showMessage("A actualizar imagem...", "success");
+
+        imageFileId = await uploadFile(imageFile, "image");
     }
 
-    if(!imageFileId)throw new Error("O produto precisa de uma imagem.");
-
-    const privateRef=doc(db,"privateProductFiles",product.id);
-    const privateSnapshot=await getDoc(privateRef);
-
-    let pdfFileId=privateSnapshot.exists()
-        ?privateSnapshot.data().pdfFileId
-        :product.pdfFileId||null;
-
-    if(pdfFile) {
-        validateFile(pdfFile,"pdf");
-        showMessage("A atualizar PDF...","success");
-        pdfFileId=await uploadFile(pdfFile,"pdf");
+    if (!imageFileId) {
+        throw new Error("O produto precisa de uma imagem.");
     }
 
-    if(!pdfFileId)throw new Error("O produto precisa de um PDF.");
+    const privateRef = doc(db, "privateProductFiles", product.id);
 
-    showMessage("A proteger os ficheiros...","success");
+    const privateSnapshot = await getDoc(privateRef);
 
-    await setDoc(privateRef,{
-        ownerId:currentUser.uid,
+    let pdfFileId = privateSnapshot.exists()
+        ? privateSnapshot.data().pdfFileId
+        : null;
+
+    if (pdfFile) {
+
+        validateFile(pdfFile, "pdf");
+
+        showMessage("A actualizar PDF...", "success");
+
+        pdfFileId = await uploadFile(pdfFile, "pdf");
+    }
+
+    if (!pdfFileId) {
+        throw new Error("O produto precisa de um PDF.");
+    }
+
+    showMessage("A guardar ficheiro privado...", "success");
+
+    await setDoc(privateRef, {
+
+        ownerId: currentUser.uid,
+
         pdfFileId,
-        updatedAt:serverTimestamp()
-    },{merge:true});
 
-    showMessage("A guardar alterações...","success");
+        updatedAt: serverTimestamp()
 
-    await updateDoc(doc(db,"produtos",product.id),{
+    }, {
+        merge: true
+    });
+
+    showMessage("A guardar alterações...", "success");
+
+    await updateDoc(doc(db, "produtos", product.id), {
+
         ...getProductData(),
+
         imageFileId,
-        pdfFileId:deleteField(),
-        updatedAt:serverTimestamp()
+
+        pdfFileId: deleteField(),
+
+        updatedAt: serverTimestamp()
+
     });
 }
 
 
-/* LISTAGEM */
+/* CARREGAR PRODUTOS */
 
 function listenToProducts(user) {
-    if(unsubscribeProducts)unsubscribeProducts();
 
-    const productsQuery=query(
-        collection(db,"produtos"),
-        where("ownerId","==",user.uid)
+    if (unsubscribeProducts) {
+        unsubscribeProducts();
+    }
+
+    const productsQuery = query(
+        collection(db, "produtos"),
+        where("ownerId", "==", user.uid)
     );
 
-    unsubscribeProducts=onSnapshot(productsQuery,snapshot=>{
-        products=snapshot.docs.map(item=>({
-            id:item.id,
+    unsubscribeProducts = onSnapshot(productsQuery, snapshot => {
+
+        products = snapshot.docs.map(item => ({
+            id: item.id,
             ...item.data()
         }));
 
         renderProducts();
-    },error=>{
-        console.error("Erro ao carregar produtos:",error);
 
-        container.innerHTML=`
+    }, error => {
+
+        console.error("Erro ao carregar produtos:", error);
+
+        container.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon">⚠</div>
                 <h3>Erro ao carregar produtos</h3>
-                <p>Verifica a ligação e as permissões do Firestore.</p>
+                <p>Verifica a ligação e as regras do Firestore.</p>
             </div>
         `;
     });
@@ -599,55 +1247,101 @@ function listenToProducts(user) {
 /* MOSTRAR PRODUTOS */
 
 function renderProducts() {
-    const search=searchInput.value.trim().toLowerCase();
 
-    const filtered=products.filter(product=>{
-        const name=String(product.name||"").toLowerCase();
-        const description=String(product.description||"").toLowerCase();
-        const category=String(product.category||"").toLowerCase();
+    const search = searchInput.value.trim().toLowerCase();
 
-        return name.includes(search)||
-            description.includes(search)||
+    const filtered = products.filter(product => {
+
+        const name = String(product.name || "").toLowerCase();
+
+        const description = String(product.description || "").toLowerCase();
+
+        const category = String(product.category || "").toLowerCase();
+
+        return name.includes(search) ||
+            description.includes(search) ||
             category.includes(search);
     });
 
-    if(!filtered.length) {
-        container.innerHTML=`
+    if (!filtered.length) {
+
+        container.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon">▣</div>
-                <h3>${search?"Nenhum produto encontrado":"Ainda não tens produtos"}</h3>
-                <p>${search
-                    ?"Experimenta pesquisar outro nome."
-                    :"Clica em Adicionar para cadastrar o teu primeiro produto."
-                }</p>
+
+                <h3>
+                    ${search ? "Nenhum produto encontrado" : "Ainda não tens produtos"}
+                </h3>
+
+                <p>
+                    ${search
+                        ? "Experimenta pesquisar outro nome."
+                        : "Clica em Adicionar para cadastrar o teu primeiro produto."
+                    }
+                </p>
             </div>
         `;
+
         return;
     }
 
-    container.innerHTML=filtered.map(product=>`
+    container.innerHTML = filtered.map(product => `
+
         <article class="product-card">
+
             <div class="product-image">
+
                 <img
-                    src="/api/image?fileId=${encodeURIComponent(product.imageFileId||"")}"
+                    src="/api/image?fileId=${encodeURIComponent(product.imageFileId || "")}"
                     alt="${escapeHTML(product.name)}"
                     loading="lazy"
                     onerror="this.style.display='none';"
                 >
+
             </div>
 
             <div class="product-info">
-                <span class="product-category">${escapeHTML(product.category||"Outros")}</span>
-                <h3 class="product-name">${escapeHTML(product.name)}</h3>
-                <p class="product-description">${escapeHTML(product.description)}</p>
-                <div class="product-price">${formatPrice(product.price)}</div>
+
+                <span class="product-category">
+                    ${escapeHTML(product.category || "Outros")}
+                </span>
+
+                <h3 class="product-name">
+                    ${escapeHTML(product.name)}
+                </h3>
+
+                <p class="product-description">
+                    ${escapeHTML(product.description)}
+                </p>
+
+                <div class="product-price">
+                    ${formatPrice(product.price)}
+                </div>
 
                 <div class="product-actions">
-                    <button class="action-btn" data-action="edit" data-id="${escapeHTML(product.id)}">Editar</button>
-                    <button class="action-btn delete" data-action="delete" data-id="${escapeHTML(product.id)}">Excluir</button>
+
+                    <button
+                        class="action-btn"
+                        data-action="edit"
+                        data-id="${escapeHTML(product.id)}"
+                    >
+                        Editar
+                    </button>
+
+                    <button
+                        class="action-btn delete"
+                        data-action="delete"
+                        data-id="${escapeHTML(product.id)}"
+                    >
+                        Excluir
+                    </button>
+
                 </div>
+
             </div>
+
         </article>
+
     `).join("");
 }
 
@@ -655,128 +1349,193 @@ function renderProducts() {
 /* PREPARAR EDIÇÃO */
 
 function editProduct(productId) {
-    const product=products.find(item=>item.id===productId);
 
-    if(!product||product.ownerId!==currentUser.uid) {
+    const product = products.find(item => item.id === productId);
+
+    if (!product || product.ownerId !== currentUser.uid) {
         alert("Produto não encontrado.");
         return;
     }
 
-    editingProductId=product.id;
+    resetForm();
 
-    document.getElementById("modalTitle").textContent="Editar produto";
-    document.getElementById("productName").value=product.name||"";
-    document.getElementById("productDescription").value=product.description||"";
-    document.getElementById("productPrice").value=product.price||"";
-    document.getElementById("productCategory").value=product.category||"";
+    editingProductId = product.id;
 
-    document.getElementById("imageFileName").textContent=
+    document.getElementById("modalTitle").textContent = "Editar produto";
+
+    document.getElementById("productName").value = product.name || "";
+
+    document.getElementById("productDescription").value = product.description || "";
+
+    document.getElementById("productPrice").value = product.price || "";
+
+    document.getElementById("productCategory").value = product.category || "";
+
+    document.getElementById("imageFileName").textContent =
         product.imageFileId
-        ?"Imagem atual guardada. Escolhe outra para substituir."
-        :"Nenhuma imagem guardada.";
+            ? "Imagem actual guardada. Escolhe outra para substituir."
+            : "Nenhuma imagem guardada.";
 
-    document.getElementById("pdfFileName").textContent=
-        "PDF atual guardado. Escolhe outro para substituir, se desejares.";
+    document.getElementById("pdfFileName").textContent =
+        "PDF actual guardado. Escolhe outro para substituir, se desejares.";
 
-    saveButton.textContent="Guardar alterações";
+    saveButton.textContent = "Guardar alterações";
+
     hideMessage();
+
     openModal();
 }
 
 
-/* EXCLUIR */
+/* EXCLUIR PRODUTO */
 
 async function deleteProduct(productId) {
-    const product=products.find(item=>item.id===productId);
 
-    if(!product||product.ownerId!==currentUser.uid) {
+    const product = products.find(item => item.id === productId);
+
+    if (!product || product.ownerId !== currentUser.uid) {
         alert("Não tens autorização para excluir este produto.");
         return;
     }
 
-    if(!confirm(`Tens a certeza que queres excluir "${product.name}"?`))return;
+    if (!confirm(`Tens a certeza que queres excluir "${product.name}"?`)) {
+        return;
+    }
 
     try {
-        await deleteDoc(doc(db,"privateProductFiles",productId));
-        await deleteDoc(doc(db,"produtos",productId));
-    } catch(error) {
-        console.error("Erro ao excluir produto:",error);
-        alert("Não foi possível excluir o produto. Verifica as regras do Firestore.");
+
+        await deleteDoc(doc(db, "privateProductFiles", productId));
+
+        await deleteDoc(doc(db, "produtos", productId));
+
+    } catch (error) {
+
+        console.error("Erro ao excluir produto:", error);
+
+        alert(
+            "Não foi possível excluir o produto. Verifica as regras do Firestore."
+        );
     }
 }
 
 
-/* GUARDAR */
+/* GUARDAR PRODUTO */
 
-form.addEventListener("submit",async event=>{
+form.addEventListener("submit", async event => {
+
     event.preventDefault();
 
-    if(!currentUser) {
+    if (submitting) return;
+
+    if (!currentUser) {
         showMessage("Inicia sessão para continuar.");
         return;
     }
 
-    saveButton.disabled=true;
-    saveButton.textContent="A guardar...";
+    submitting = true;
+
+    saveButton.disabled = true;
+
+    saveButton.textContent = "A guardar...";
 
     try {
-        const productData=getProductData();
 
-        if(editingProductId) {
-            const product=products.find(item=>item.id===editingProductId);
+        const productData = getProductData();
 
-            if(!product||product.ownerId!==currentUser.uid) {
+        if (editingProductId) {
+
+            const product = products.find(
+                item => item.id === editingProductId
+            );
+
+            if (!product || product.ownerId !== currentUser.uid) {
                 throw new Error("Produto não encontrado.");
             }
 
             await updateProduct(product);
+
         } else {
+
             await createProduct(productData);
         }
 
-        showMessage("Produto guardado com sucesso!","success");
-        setTimeout(closeModal,800);
+        showMessage("Produto guardado com sucesso!", "success");
 
-    } catch(error) {
-        console.error("Erro ao guardar:",error);
-        showMessage(error.message||"Ocorreu um erro ao guardar.");
+        setTimeout(() => {
 
-    } finally {
-        saveButton.disabled=false;
-        saveButton.textContent=editingProductId
-            ?"Guardar alterações"
-            :"Guardar produto";
+            submitting = false;
+
+            modal.classList.remove("show");
+
+            resetForm();
+
+        }, 900);
+
+    } catch (error) {
+
+        console.error("Erro ao guardar produto:", error);
+
+        showMessage(
+            error.message || "Ocorreu um erro ao guardar."
+        );
+
+        submitting = false;
+
+        saveButton.disabled = false;
+
+        saveButton.textContent = editingProductId
+            ? "Guardar alterações"
+            : "Guardar produto";
     }
 });
 
 
-/* AÇÕES DOS CARTÕES */
+/* ACÇÕES DOS CARTÕES */
 
-container.addEventListener("click",event=>{
-    const button=event.target.closest("button[data-action]");
-    if(!button)return;
+container.addEventListener("click", event => {
 
-    const action=button.dataset.action;
-    const productId=button.dataset.id;
+    const button = event.target.closest("button[data-action]");
 
-    if(action==="edit")editProduct(productId);
-    if(action==="delete")deleteProduct(productId);
+    if (!button) return;
+
+    const action = button.dataset.action;
+
+    const productId = button.dataset.id;
+
+    if (action === "edit") {
+        editProduct(productId);
+    }
+
+    if (action === "delete") {
+        deleteProduct(productId);
+    }
 });
 
 
 /* AUTENTICAÇÃO */
 
-onAuthStateChanged(auth,user=>{
-    if(!user) {
-        if(unsubscribeProducts)unsubscribeProducts();
-        window.location.href="index.html";
+onAuthStateChanged(auth, user => {
+
+    if (!user) {
+
+        currentUser = null;
+
+        if (unsubscribeProducts) {
+            unsubscribeProducts();
+            unsubscribeProducts = null;
+        }
+
+        window.location.replace("index.html");
+
         return;
     }
 
-    currentUser=user;
+    currentUser = user;
 
-    document.getElementById("userInitial").textContent=
-        (user.displayName||user.email||"U").charAt(0).toUpperCase();
+    document.getElementById("userInitial").textContent =
+        (user.displayName || user.email || "U")
+            .charAt(0)
+            .toUpperCase();
 
     listenToProducts(user);
 });
@@ -784,59 +1543,89 @@ onAuthStateChanged(auth,user=>{
 
 /* MODAL */
 
-document.getElementById("openModal").addEventListener("click",()=>{
+document.getElementById("openModal").addEventListener("click", () => {
+
     resetForm();
+
     openModal();
 });
 
-document.getElementById("closeModal").addEventListener("click",closeModal);
-document.getElementById("cancelModal").addEventListener("click",closeModal);
 
-modal.addEventListener("click",event=>{
-    if(event.target===modal)closeModal();
+document.getElementById("closeModal").addEventListener("click", closeModal);
+
+document.getElementById("cancelModal").addEventListener("click", closeModal);
+
+
+modal.addEventListener("click", event => {
+
+    if (event.target === modal) {
+        closeModal();
+    }
 });
 
-searchInput.addEventListener("input",renderProducts);
+
+searchInput.addEventListener("input", renderProducts);
 
 
 /* NOMES DOS FICHEIROS */
 
-imageInput.addEventListener("change",()=>{
-    const file=imageInput.files[0];
-    document.getElementById("imageFileName").textContent=file?file.name:"";
+imageInput.addEventListener("change", () => {
+
+    const file = imageInput.files[0];
+
+    document.getElementById("imageFileName").textContent =
+        file ? file.name : "";
 });
 
-pdfInput.addEventListener("change",()=>{
-    const file=pdfInput.files[0];
-    document.getElementById("pdfFileName").textContent=file?file.name:"";
+
+pdfInput.addEventListener("change", () => {
+
+    const file = pdfInput.files[0];
+
+    document.getElementById("pdfFileName").textContent =
+        file ? file.name : "";
 });
 
 
 /* MENU MOBILE */
 
-document.getElementById("mobileMenu").addEventListener("click",()=>{
+document.getElementById("mobileMenu").addEventListener("click", () => {
+
     document.getElementById("sidebar").classList.toggle("open");
 });
 
 
 /* TERMINAR SESSÃO */
 
-document.getElementById("logoutLink").addEventListener("click",async event=>{
+document.getElementById("logoutLink").addEventListener("click", async event => {
+
     event.preventDefault();
 
     try {
+
         await signOut(auth);
-        window.location.href="index.html";
-    } catch(error) {
-        console.error(error);
+
+        window.location.replace("index.html");
+
+    } catch (error) {
+
+        console.error("Erro ao terminar sessão:", error);
+
         alert("Não foi possível terminar a sessão.");
     }
 });
 
-document.getElementById("supportLink").addEventListener("click",event=>{
+
+/* SUPORTE */
+
+document.getElementById("supportLink").addEventListener("click", event => {
+
     event.preventDefault();
+
     alert("O suporte será configurado nesta página.");
 });
+
 </script>
+
 </body>
 </html>
