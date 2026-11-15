@@ -1,1 +1,586 @@
 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#030a12">
+<title>Vitrine | LowticketPay</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg:#030a12;
+    --card:#0b1420;
+    --card2:#101c2a;
+    --border:#202d3b;
+    --text:#f4f7fb;
+    --muted:#8b9aaa;
+    --blue:#20baf0;
+    --green:#70df39;
+}
+
+* {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body {
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+header {
+    height:72px;
+    border-bottom:1px solid var(--border);
+    background:#07111c;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-.7px;
+}
+
+.logo-icon {
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    display:grid;
+    place-items:center;
+    background:var(--green);
+    color:#061108;
+}
+
+.logo span {
+    color:var(--green);
+}
+
+.header-label {
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
+}
+
+main {
+    max-width:1200px;
+    margin:auto;
+    padding:45px 25px 60px;
+}
+
+.hero {
+    margin-bottom:35px;
+}
+
+.hero-label {
+    color:var(--green);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    margin-bottom:13px;
+}
+
+.hero h1 {
+    font-size:clamp(25px,4vw,38px);
+    font-weight:800;
+    letter-spacing:-1.4px;
+    line-height:1.2;
+    max-width:650px;
+}
+
+.hero p {
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.7;
+    margin-top:12px;
+    max-width:550px;
+}
+
+.toolbar {
+    display:flex;
+    gap:12px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.search {
+    flex:1;
+    min-width:200px;
+    height:46px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:9px;
+    color:white;
+    padding:0 15px;
+    outline:none;
+    font:inherit;
+    font-size:12px;
+}
+
+.search:focus {
+    border-color:var(--blue);
+}
+
+.category-filter {
+    height:46px;
+    min-width:155px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:9px;
+    color:white;
+    padding:0 12px;
+    outline:none;
+    font:inherit;
+    font-size:12px;
+}
+
+.products-heading {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.products-heading h2 {
+    font-size:17px;
+    font-weight:800;
+}
+
+.product-count {
+    color:var(--muted);
+    font-size:11px;
+}
+
+.products-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:18px;
+}
+
+.product-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    min-width:0;
+    transition:.2s;
+}
+
+.product-card:hover {
+    border-color:#36536a;
+    transform:translateY(-3px);
+}
+
+.product-image {
+    height:175px;
+    background:#101d2a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.product-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.image-placeholder {
+    color:#52677a;
+    font-size:34px;
+}
+
+.product-info {
+    padding:15px;
+}
+
+.category {
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:5px;
+    background:#102536;
+    color:var(--blue);
+    font-size:9px;
+    font-weight:800;
+    margin-bottom:11px;
+}
+
+.product-name {
+    font-size:14px;
+    font-weight:800;
+    line-height:1.45;
+    overflow-wrap:anywhere;
+    margin-bottom:7px;
+}
+
+.description {
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.6;
+    overflow-wrap:anywhere;
+    min-height:35px;
+}
+
+.price {
+    color:var(--green);
+    font-size:18px;
+    font-weight:800;
+    margin-top:14px;
+}
+
+.empty-state {
+    grid-column:1/-1;
+    padding:55px 20px;
+    text-align:center;
+    background:var(--card);
+    border:1px dashed var(--border);
+    border-radius:12px;
+}
+
+.empty-icon {
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+.empty-state h3 {
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.empty-state p {
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+}
+
+footer {
+    border-top:1px solid var(--border);
+    padding:25px;
+    text-align:center;
+    color:var(--muted);
+    font-size:10px;
+}
+
+@media(max-width:550px) {
+    header {
+        height:62px;
+        padding:0 17px;
+    }
+
+    .logo {
+        font-size:17px;
+    }
+
+    .header-label {
+        font-size:9px;
+    }
+
+    main {
+        padding:32px 15px 45px;
+    }
+
+    .products-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+    }
+
+    .product-image {
+        height:120px;
+    }
+
+    .product-info {
+        padding:11px;
+    }
+
+    .product-name {
+        font-size:12px;
+    }
+
+    .description {
+        font-size:10px;
+    }
+
+    .price {
+        font-size:15px;
+    }
+
+    .category-filter {
+        min-width:125px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">L</div>
+        <div>Lowticket<span>Pay</span></div>
+    </div>
+
+    <div class="header-label">VITRINE PÚBLICA</div>
+</header>
+
+<main>
+
+    <section class="hero">
+        <div class="hero-label">LOWTICKETPAY MARKETPLACE</div>
+
+        <h1>Descubra produtos digitais.</h1>
+
+        <p>
+            Explore ebooks, cursos, templates e outros produtos
+            digitais disponíveis na nossa vitrine.
+        </p>
+    </section>
+
+    <section class="toolbar">
+
+        <input
+            type="search"
+            class="search"
+            id="searchInput"
+            placeholder="Pesquisar produtos..."
+        >
+
+        <select class="category-filter" id="categoryFilter">
+            <option value="">Todas categorias</option>
+            <option value="Ebook">Ebook</option>
+            <option value="Curso online">Curso online</option>
+            <option value="Software">Software</option>
+            <option value="Templates">Templates</option>
+            <option value="Áudio">Áudio</option>
+            <option value="Vídeo aula">Vídeo aula</option>
+            <option value="Outros">Outros</option>
+        </select>
+
+    </section>
+
+    <section>
+
+        <div class="products-heading">
+            <h2>Todos os produtos</h2>
+            <span class="product-count" id="productCount">
+                A carregar...
+            </span>
+        </div>
+
+        <div class="products-grid" id="productsContainer">
+
+            <div class="empty-state">
+                <div class="empty-icon">▣</div>
+                <h3>A carregar produtos...</h3>
+                <p>Aguarda um momento.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 LowticketPay. Todos os direitos reservados.
+</footer>
+
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+    collection,
+    onSnapshot
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+
+const container = document.getElementById("productsContainer");
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const productCount = document.getElementById("productCount");
+
+let products = [];
+
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[character]);
+}
+
+
+function formatPrice(price) {
+    return Number(price || 0).toLocaleString("pt-MZ", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }) + " MT";
+}
+
+
+function renderProducts() {
+
+    const search = searchInput.value.trim().toLowerCase();
+    const category = categoryFilter.value;
+
+    const filtered = products.filter(product => {
+
+        const name = String(product.name || "").toLowerCase();
+        const description = String(product.description || "").toLowerCase();
+        const productCategory = String(product.category || "");
+
+        const matchesSearch =
+            name.includes(search) ||
+            description.includes(search) ||
+            productCategory.toLowerCase().includes(search);
+
+        const matchesCategory =
+            !category || productCategory === category;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    productCount.textContent =
+        filtered.length + (filtered.length === 1 ? " produto" : " produtos");
+
+    if (!filtered.length) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">▣</div>
+                <h3>Nenhum produto encontrado</h3>
+                <p>
+                    Ainda não existem produtos nesta categoria
+                    ou a pesquisa não encontrou resultados.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = filtered.map(product => {
+
+        const imageUrl = product.imageFileId
+            ? "/api/image?fileId=" + encodeURIComponent(product.imageFileId)
+            : "";
+
+        return `
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    ${
+                        imageUrl
+                        ? `
+                            <img
+                                src="${imageUrl}"
+                                alt="${escapeHTML(product.name)}"
+                                loading="lazy"
+                                onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+                            >
+                            <div class="image-placeholder" style="display:none;">▣</div>
+                          `
+                        : `<div class="image-placeholder">▣</div>`
+                    }
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="category">
+                        ${escapeHTML(product.category || "Outros")}
+                    </span>
+
+                    <h3 class="product-name">
+                        ${escapeHTML(product.name || "Produto sem nome")}
+                    </h3>
+
+                    <p class="description">
+                        ${escapeHTML(product.description || "")}
+                    </p>
+
+                    <div class="price">
+                        ${formatPrice(product.price)}
+                    </div>
+
+                </div>
+
+            </article>
+        `;
+
+    }).join("");
+}
+
+
+searchInput.addEventListener("input", renderProducts);
+categoryFilter.addEventListener("change", renderProducts);
+
+
+/* CARREGAR PRODUTOS PUBLICAMENTE */
+
+onSnapshot(
+    collection(db, "produtos"),
+
+    snapshot => {
+
+        products = snapshot.docs.map(item => ({
+            id: item.id,
+            ...item.data()
+        }));
+
+        products.sort((a, b) => {
+
+            const dateA = a.createdAt?.toMillis?.() || 0;
+            const dateB = b.createdAt?.toMillis?.() || 0;
+
+            return dateB - dateA;
+        });
+
+        renderProducts();
+
+    },
+
+    error => {
+
+        console.error("Erro ao carregar vitrine:", error);
+
+        productCount.textContent = "Erro";
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">⚠</div>
+                <h3>Não foi possível carregar os produtos</h3>
+                <p>
+                    Verifica as regras de leitura pública
+                    do Firestore e tenta novamente.
+                </p>
+            </div>
+        `;
+    }
+);
+
+</script>
+
+</body>
+</html>
+
