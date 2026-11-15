@@ -1,14 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#030a12">
-<title>LowticketPay - Dashboard</title>
+<meta name="theme-color" content="#080808">
+
+<title>Entrar | LowticketPay</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -16,906 +19,414 @@
 }
 
 body {
-    background: #030a12;
+    min-height: 100vh;
+    background: #080808;
     color: #fff;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-/* BARRA SUPERIOR */
-.top-toolbar {
+.container {
     width: 100%;
-    height: 100px;
-    padding: 0 7.5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #030a12;
+    max-width: 420px;
 }
 
-.toolbar-left,
-.toolbar-right {
-    display: flex;
-    align-items: center;
+.logo {
+    text-align: center;
+    margin-bottom: 35px;
 }
 
-.toolbar-right {
-    gap: 65px;
-}
-
-.toolbar-button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    display: flex;
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    background: #f5c400;
+    color: #080808;
+    border-radius: 13px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-}
-
-.toolbar-button svg {
-    width: 40px;
-    height: 40px;
-    fill: none;
-    stroke: #858585;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-/* FUNDO DO MENU */
-.menu-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s ease;
-    z-index: 998;
-}
-
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* MENU LATERAL */
-.side-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    max-width: 85%;
-    height: 100vh;
-    height: 100dvh;
-    background: #030a12;
-    border-right: 1px solid #292929;
-    padding: 25px 18px;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 999;
-    overflow-y: auto;
-}
-
-.side-menu.active {
-    transform: translateX(0);
-}
-
-/* CABEÇALHO E LOGO DO MENU */
-.menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 8px 0 25px;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #242a32;
-}
-
-.menu-logo {
-    width: 175px;
-    max-width: calc(100% - 35px);
-    height: auto;
-    object-fit: contain;
-    display: block;
-}
-
-.menu-close {
-    background: transparent;
-    border: none;
-    color: #969eaa;
-    font-size: 30px;
-    cursor: pointer;
-    line-height: 1;
-}
-
-/* LINKS DO MENU */
-.menu-links {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
-
-.menu-links a {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 15px 13px;
-    border-radius: 9px;
-    color: #969eaa;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    transition: 0.2s ease;
-}
-
-.menu-links a svg {
-    width: 21px;
-    height: 21px;
-    min-width: 21px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.menu-links a:hover,
-.menu-links a.active {
-    background: #102237;
-    color: #20baf0;
-}
-
-.menu-section-title {
-    color: #606b78;
-    font-size: 10px;
+    font-size: 27px;
     font-weight: 800;
-    letter-spacing: 1.2px;
-    margin: 25px 12px 10px;
+    margin-bottom: 12px;
 }
 
-/* CABEÇALHO DO DASHBOARD */
-.dashboard-heading {
-    width: calc(100% - 40px);
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 14px 16px;
-    background: #030a12;
-    border: 2px solid #292929;
-    border-radius: 11px;
-}
-
-.heading-content {
-    width: 100%;
-    min-height: 62px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.dashboard-heading h2 {
-    font-size: 20px;
+.logo h1 {
+    font-size: 25px;
     font-weight: 800;
-    color: #fff;
-    white-space: nowrap;
+    letter-spacing: -1px;
 }
 
-/* SELETOR DE PERÍODO */
-.period-selector {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 15px 16px;
-    min-height: 60px;
-    border: 2px solid #292929;
-    border-radius: 10px;
-    cursor: pointer;
-    flex-shrink: 0;
+.logo h1 span {
+    color: #f5c400;
 }
 
-.period-left {
-    display: flex;
-    align-items: center;
-    gap: 9px;
+.logo p {
+    color: #777;
+    font-size: 12px;
+    margin-top: 8px;
 }
 
-.calendar-icon {
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    fill: none;
-    stroke: #969eaa;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.card {
+    background: #111;
+    border: 1px solid #252525;
+    border-radius: 18px;
+    padding: 30px 24px;
 }
 
-.period-text {
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #888;
     font-size: 13px;
-    font-weight: 800;
-    color: #fff;
-    white-space: nowrap;
+    margin-bottom: 28px;
+    line-height: 1.6;
 }
 
-.arrow-icon {
-    width: 19px;
-    height: 19px;
-    min-width: 19px;
-    fill: none;
-    stroke: #969eaa;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.field {
+    margin-bottom: 19px;
 }
 
-/* INDICADORES */
-.dashboard-stats {
-    width: calc(100% - 40px);
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 25px 20px;
-    display: flex;
-    justify-content: center;
-    background: #030a12;
-    border: 2px solid #292929;
-    border-radius: 11px;
-}
-
-.stats-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    width: fit-content;
-}
-
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    min-width: 0;
-}
-
-.stat-icon {
-    width: 43px;
-    height: 43px;
-    min-width: 43px;
-    fill: none;
-    stroke: #fff;
-    stroke-width: 1.9;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.stat-content {
-    min-width: 0;
-}
-
-.stat-label {
-    color: #969eaa;
-    font-size: 15px;
-    font-weight: 900;
+label {
+    display: block;
+    font-size: 12px;
+    color: #ccc;
     margin-bottom: 9px;
+    font-weight: 600;
 }
 
-.stat-value {
-    font-size: 30px;
-    font-weight: 800;
-    white-space: nowrap;
+.input-wrap {
+    position: relative;
 }
 
-.faturamento .stat-value { color: #35aaff; }
-.lucro .stat-value { color: #70df39; }
-.falhas .stat-value { color: #ff6262; }
-.realizadas .stat-value { color: #70df39; }
-
-/* MEIOS DE PAGAMENTO */
-.payment-section {
-    width: calc(100% - 40px);
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 22px 20px;
-    background: #030a12;
-    border: 2px solid #292929;
-    border-radius: 11px;
-}
-
-.payment-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 18px;
-}
-
-.payment-heading h3 {
-    font-size: 21px;
-    font-weight: 700;
+input {
+    width: 100%;
+    height: 49px;
+    border: 1px solid #303030;
+    background: #090909;
+    border-radius: 9px;
+    padding: 0 14px;
     color: #fff;
-}
-
-.payment-period {
+    font-family: inherit;
     font-size: 13px;
-    color: #969eaa;
-    white-space: nowrap;
+    outline: none;
 }
 
-.payment-table-header {
-    display: grid;
-    grid-template-columns: 1.5fr 0.85fr 1fr;
-    align-items: center;
-    gap: 10px;
-    padding: 0 5px 10px;
-    color: #969eaa;
-    font-size: 14px;
-    font-weight: 700;
+input:focus {
+    border-color: #f5c400;
 }
 
-.payment-table-header div:nth-child(2) { text-align: center; }
-.payment-table-header div:nth-child(3) { text-align: right; }
-
-.payment-row {
-    display: grid;
-    grid-template-columns: 1.5fr 0.85fr 1fr;
-    align-items: center;
-    gap: 10px;
-    min-height: 75px;
-    padding: 9px 5px;
-    border-top: 1px solid #292929;
+input::placeholder {
+    color: #555;
 }
 
-.payment-method {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
+.password-input {
+    padding-right: 75px;
 }
 
-.payment-method img {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    object-fit: contain;
+.toggle {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.forgot {
     display: block;
-}
-
-.payment-method span {
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-}
-
-.payment-approval {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.approval-value {
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
-}
-
-.approval-bar {
-    width: 65px;
-    height: 6px;
-    background: #171717;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.approval-fill {
-    width: 0%;
-    height: 100%;
-    background: #70df39;
-    border-radius: 20px;
-    transition: width 0.3s ease;
-}
-
-.payment-amount {
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
     text-align: right;
-    white-space: nowrap;
+    color: #f5c400;
+    font-size: 11px;
+    text-decoration: none;
+    margin-top: -5px;
+    margin-bottom: 22px;
 }
 
-/* MOBILE */
-@media (max-width: 480px) {
-    .top-toolbar {
-        height: 85px;
-        padding: 0 7.5%;
-    }
-
-    .toolbar-button svg {
-        width: 23px;
-        height: 35px;
-    }
-
-    .toolbar-right { gap: 35px; }
-
-    .dashboard-heading {
-        width: calc(100% - 26px);
-        padding: 12px;
-        margin: 18px auto;
-    }
-
-    .heading-content {
-        min-height: 62px;
-        gap: 8px;
-    }
-
-    .dashboard-heading h2 { font-size: 18px; }
-
-    .period-selector {
-        gap: 7px;
-        padding: 12px 10px;
-        min-height: 58px;
-    }
-
-    .period-left { gap: 6px; }
-
-    .calendar-icon {
-        width: 19px;
-        height: 19px;
-        min-width: 19px;
-    }
-
-    .period-text { font-size: 11px; }
-
-    .arrow-icon {
-        width: 17px;
-        height: 17px;
-        min-width: 17px;
-    }
-
-    .dashboard-stats {
-        width: calc(100% - 26px);
-        padding: 25px 13px;
-    }
-
-    .stats-grid { gap: 35px; }
-
-    .stat-item { gap: 12px; }
-
-    .stat-icon {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-    }
-
-    .stat-label {
-        font-size: 12px;
-        margin-bottom: 8px;
-    }
-
-    .stat-value { font-size: 17px; }
-
-    .payment-section {
-        width: calc(100% - 26px);
-        padding: 18px 12px;
-    }
-
-    .payment-heading { margin-bottom: 16px; }
-    .payment-heading h3 { font-size: 17px; }
-    .payment-period { font-size: 11px; }
-
-    .payment-table-header {
-        font-size: 11px;
-        grid-template-columns: 1.4fr 0.8fr 1fr;
-        padding-bottom: 8px;
-        gap: 5px;
-    }
-
-    .payment-row {
-        grid-template-columns: 1.4fr 0.8fr 1fr;
-        min-height: 65px;
-        padding: 7px 3px;
-        gap: 5px;
-    }
-
-    .payment-method { gap: 8px; }
-
-    .payment-method img {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-    }
-
-    .payment-method span { font-size: 12px; }
-    .approval-value { font-size: 15px; }
-
-    .approval-bar {
-        width: 48px;
-        height: 5px;
-    }
-
-    .payment-approval { gap: 5px; }
-    .payment-amount { font-size: 12px; }
+.login-btn {
+    width: 100%;
+    height: 49px;
+    background: #f5c400;
+    color: #080808;
+    border: none;
+    border-radius: 9px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .2s;
 }
 
-/* ECRÃS MUITO PEQUENOS */
-@media (max-width: 350px) {
-    .dashboard-heading {
-        width: calc(100% - 20px);
-        padding: 10px 8px;
+.login-btn:hover {
+    background: #ffda35;
+}
+
+.login-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.message {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 17px;
+    line-height: 1.5;
+}
+
+.message.error {
+    display: block;
+    background: #351616;
+    color: #ff8585;
+}
+
+.message.success {
+    display: block;
+    background: #16351f;
+    color: #80e69b;
+}
+
+.register {
+    text-align: center;
+    margin-top: 25px;
+    color: #888;
+    font-size: 12px;
+}
+
+.register a {
+    color: #f5c400;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.footer {
+    text-align: center;
+    color: #555;
+    font-size: 10px;
+    margin-top: 28px;
+}
+
+@media(max-width: 380px) {
+    .card {
+        padding: 25px 18px;
     }
-
-    .dashboard-heading h2 { font-size: 16px; }
-
-    .period-selector {
-        padding: 10px 7px;
-        gap: 5px;
-    }
-
-    .period-text { font-size: 10px; }
-
-    .calendar-icon {
-        width: 16px;
-        height: 16px;
-        min-width: 16px;
-    }
-
-    .dashboard-stats {
-        width: calc(100% - 20px);
-        padding-left: 9px;
-        padding-right: 9px;
-    }
-
-    .payment-section {
-        width: calc(100% - 20px);
-        padding: 15px 9px;
-    }
-
-    .payment-heading h3 { font-size: 15px; }
-
-    .payment-method img {
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-    }
-
-    .payment-method span { font-size: 11px; }
-    .payment-amount { font-size: 11px; }
-    .approval-value { font-size: 14px; }
-    .approval-bar { width: 40px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- BARRA SUPERIOR -->
-<nav class="top-toolbar">
-    <div class="toolbar-left">
-        <button class="toolbar-button"
-                id="menuButton"
-                aria-label="Abrir menu"
-                aria-expanded="false"
-                aria-controls="sideMenu">
-            <svg viewBox="0 0 24 24">
-                <path d="M3 5h18"/>
-                <path d="M3 12h18"/>
-                <path d="M3 19h18"/>
-            </svg>
-        </button>
+<div class="container">
+
+    <div class="logo">
+        <div class="logo-icon">L</div>
+        <h1>Lowticket<span>Pay</span></h1>
+        <p>Plataforma de pagamentos e produtos digitais</p>
     </div>
 
-    <div class="toolbar-right">
-        <button class="toolbar-button" aria-label="Notificações" type="button">
-            <svg viewBox="0 0 24 24">
-                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-                <path d="M10 21h4"/>
-            </svg>
-        </button>
+    <div class="card">
 
-        <button class="toolbar-button" aria-label="Tema" type="button">
-            <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2"/>
-                <path d="M12 20v2"/>
-                <path d="m4.93 4.93 1.42 1.42"/>
-                <path d="m17.65 17.65 1.42 1.42"/>
-                <path d="M2 12h2"/>
-                <path d="M20 12h2"/>
-                <path d="m4.93 19.07 1.42-1.42"/>
-                <path d="m17.65 6.35 1.42-1.42"/>
-            </svg>
-        </button>
-    </div>
-</nav>
+        <h2>Bem-vindo de volta</h2>
 
-<!-- FUNDO DO MENU -->
-<div class="menu-overlay" id="menuOverlay"></div>
+        <p class="subtitle">
+            Introduza os seus dados para aceder à sua conta.
+        </p>
 
-<!-- MENU LATERAL -->
-<aside class="side-menu" id="sideMenu" aria-label="Menu principal">
-    <div class="menu-header">
-        <img
-            src="assets/lowticketpay.png"
-            alt="LowticketPay"
-            class="menu-logo"
-        >
+        <div id="message" class="message" role="alert" aria-live="polite"></div>
 
-        <button class="menu-close"
-                id="menuClose"
-                aria-label="Fechar menu"
-                type="button">
-            &times;
-        </button>
-    </div>
+        <form id="loginForm">
 
-    <nav class="menu-links">
-        <a href="dashboard.html" class="active">
-            <svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="8" height="8" rx="1"/>
-                <rect x="13" y="3" width="8" height="5" rx="1"/>
-                <rect x="13" y="10" width="8" height="11" rx="1"/>
-                <rect x="3" y="13" width="8" height="8" rx="1"/>
-            </svg>
-            Dashboard
-        </a>
+            <div class="field">
+                <label for="email">E-mail</label>
 
-        <a href="produtos.html">
-            <svg viewBox="0 0 24 24">
-                <path d="m3 7 9-4 9 4-9 4-9-4Z"/>
-                <path d="M3 7v10l9 4 9-4V7"/>
-                <path d="M12 11v10"/>
-            </svg>
-            Produtos
-        </a>
-
-        <a href="vitrine.html">
-            <svg viewBox="0 0 24 24">
-                <path d="M3 10h18l-2-6H5l-2 6Z"/>
-                <path d="M4 10v10h16V10"/>
-                <path d="M9 20v-6h6v6"/>
-            </svg>
-            Vitrine
-        </a>
-
-
-        <a href="financeiro.html">
-            <svg viewBox="0 0 24 24">
-                <rect x="3" y="5" width="18" height="15" rx="2"/>
-                <path d="M3 10h18"/>
-                <path d="M16 15h2"/>
-            </svg>
-            Financeiro
-        </a>
-    </nav>
-</aside>
-
-<!-- CABEÇALHO DO DASHBOARD -->
-<header class="dashboard-heading">
-    <div class="heading-content">
-        <h2>Dashboard</h2>
-
-        <div class="period-selector">
-            <div class="period-left">
-                <svg class="calendar-icon" viewBox="0 0 24 24">
-                    <rect x="3" y="5" width="18" height="16" rx="2"/>
-                    <path d="M16 3v4M8 3v4M3 10h18"/>
-                    <path d="M8 14h.01M12 14h.01M16 14h.01"/>
-                    <path d="M8 17h.01M12 17h.01M16 17h.01"/>
-                </svg>
-                <span class="period-text">Últimos 7 dias</span>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="seuemail@exemplo.com"
+                    autocomplete="username"
+                    required
+                >
             </div>
 
-            <svg class="arrow-icon" viewBox="0 0 24 24">
-                <path d="m6 9 6 6 6-6"/>
-            </svg>
-        </div>
-    </div>
-</header>
+            <div class="field">
+                <label for="password">Palavra-passe</label>
 
-<!-- INDICADORES -->
-<main class="dashboard-stats">
-    <section class="stats-grid">
+                <div class="input-wrap">
 
-        <div class="stat-item faturamento">
-            <svg class="stat-icon" viewBox="0 0 24 24">
-                <path d="M3 17l6-6 4 4 8-9"/>
-                <path d="M15 6h6v6"/>
-            </svg>
-            <div class="stat-content">
-                <div class="stat-label">Faturamento</div>
-                <div class="stat-value" id="faturamento">0,00 MT</div>
+                    <input
+                        type="password"
+                        id="password"
+                        class="password-input"
+                        placeholder="Introduza a sua palavra-passe"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle"
+                        id="togglePassword"
+                    >
+                        Mostrar
+                    </button>
+
+                </div>
             </div>
+
+            <a href="esqueceu-senha.html" class="forgot">
+                Esqueceu a palavra-passe?
+            </a>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                Entrar na conta
+            </button>
+
+        </form>
+
+        <div class="register">
+            Ainda não tem conta?
+            <a href="criar-conta.html">Criar conta</a>
         </div>
 
-        <div class="stat-item lucro">
-            <svg class="stat-icon" viewBox="0 0 24 24">
-                <path d="M12 2v20"/>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
-            <div class="stat-content">
-                <div class="stat-label">Lucro</div>
-                <div class="stat-value" id="lucro">0,00 MT</div>
-            </div>
-        </div>
-
-        <div class="stat-item falhas">
-            <svg class="stat-icon" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="m9 9 6 6"/>
-                <path d="m15 9-6 6"/>
-            </svg>
-            <div class="stat-content">
-                <div class="stat-label">Vendas falhadas</div>
-                <div class="stat-value" id="vendasFalhadas">0</div>
-            </div>
-        </div>
-
-        <div class="stat-item realizadas">
-            <svg class="stat-icon" viewBox="0 0 24 24">
-                <path d="m5 12 4 4L19 6"/>
-                <path d="m3 17 2 2 4-4"/>
-            </svg>
-            <div class="stat-content">
-                <div class="stat-label">Vendas realizadas</div>
-                <div class="stat-value" id="vendasRealizadas">0</div>
-            </div>
-        </div>
-
-    </section>
-</main>
-
-<!-- MEIOS DE PAGAMENTO -->
-<section class="payment-section">
-    <div class="payment-heading">
-        <h3>Meios de pagamento</h3>
-        <span class="payment-period">Últimos 7 dias</span>
     </div>
 
-    <div class="payment-table-header">
-        <div>Método</div>
-        <div>Desempenho</div>
-        <div>Valor</div>
+    <div class="footer">
+        © 2026 LowticketPay. Todos os direitos reservados.
     </div>
 
-    <div class="payment-row">
-        <div class="payment-method">
-            <img src="assets/mpesa.png" alt="M-Pesa">
-            <span>M-Pesa</span>
-        </div>
+</div>
 
-        <div class="payment-approval">
-            <span class="approval-value" id="mpesaApproval">0%</span>
-            <div class="approval-bar">
-                <div class="approval-fill" id="mpesaBar"></div>
-            </div>
-        </div>
+<script type="module">
 
-        <div class="payment-amount" id="mpesaAmount">0,00 MT</div>
-    </div>
+import { auth } from "./js/firebase.js";
 
-    <div class="payment-row">
-        <div class="payment-method">
-            <img src="assets/emola.png" alt="e-Mola">
-            <span>e-Mola</span>
-        </div>
+import {
+    signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
-        <div class="payment-approval">
-            <span class="approval-value" id="emolaApproval">0%</span>
-            <div class="approval-bar">
-                <div class="approval-fill" id="emolaBar"></div>
-            </div>
-        </div>
+const form = document.getElementById("loginForm");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const message = document.getElementById("message");
+const togglePassword = document.getElementById("togglePassword");
 
-        <div class="payment-amount" id="emolaAmount">0,00 MT</div>
-    </div>
-</section>
+let submitting = false;
 
-<script>
-// DADOS DE DEMONSTRAÇÃO.
-// Estes valores começam em zero; ainda não estão ligados a uma base de dados.
-const dadosDashboard = {
-    faturamento: 0,
-    lucro: 0,
-    vendasFalhadas: 0,
-    vendasRealizadas: 0
-};
+/* MENSAGENS */
 
-const dadosPagamentos = {
-    mpesa: {
-        aprovacao: 0,
-        valor: 0
-    },
-    emola: {
-        aprovacao: 0,
-        valor: 0
-    }
-};
-
-// FORMATAR MOEDA
-function formatarMoeda(valor) {
-    return Number(valor || 0).toLocaleString('pt-MZ', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }) + ' MT';
+function showMessage(text, type = "error") {
+    message.textContent = text;
+    message.className = "message " + type;
 }
 
-// ATUALIZAR INDICADORES
-function atualizarDashboard(dados) {
-    document.getElementById('faturamento').textContent =
-        formatarMoeda(dados.faturamento);
+function translateError(error) {
 
-    document.getElementById('lucro').textContent =
-        formatarMoeda(dados.lucro);
+    const errors = {
+        "auth/invalid-email":
+            "O endereço de e-mail é inválido.",
 
-    document.getElementById('vendasFalhadas').textContent =
-        Number(dados.vendasFalhadas || 0);
+        "auth/user-not-found":
+            "Não existe uma conta com este e-mail.",
 
-    document.getElementById('vendasRealizadas').textContent =
-        Number(dados.vendasRealizadas || 0);
+        "auth/wrong-password":
+            "Palavra-passe incorrecta.",
+
+        "auth/invalid-credential":
+            "E-mail ou palavra-passe incorrectos.",
+
+        "auth/too-many-requests":
+            "Demasiadas tentativas. Tente novamente mais tarde.",
+
+        "auth/network-request-failed":
+            "Erro de ligação. Verifique a internet.",
+
+        "auth/user-disabled":
+            "Esta conta foi desactivada.",
+
+        "auth/operation-not-allowed":
+            "O acesso por e-mail não está activado no Firebase."
+    };
+
+    return errors[error.code] ||
+        "Não foi possível entrar. Tente novamente.";
 }
 
-// ATUALIZAR MEIOS DE PAGAMENTO
-function atualizarPagamentos(dados) {
-    const mpesaPercentual = Math.min(
-        100, Math.max(0, Number(dados.mpesa.aprovacao) || 0)
-    );
+/* MOSTRAR / OCULTAR PALAVRA-PASSE */
 
-    document.getElementById('mpesaApproval').textContent =
-        mpesaPercentual + '%';
+togglePassword.addEventListener("click", () => {
 
-    document.getElementById('mpesaAmount').textContent =
-        formatarMoeda(dados.mpesa.valor);
+    const visible = passwordInput.type === "text";
 
-    document.getElementById('mpesaBar').style.width =
-        mpesaPercentual + '%';
+    passwordInput.type = visible ? "password" : "text";
 
-    const emolaPercentual = Math.min(
-        100, Math.max(0, Number(dados.emola.aprovacao) || 0)
-    );
+    togglePassword.textContent =
+        visible ? "Mostrar" : "Ocultar";
 
-    document.getElementById('emolaApproval').textContent =
-        emolaPercentual + '%';
-
-    document.getElementById('emolaAmount').textContent =
-        formatarMoeda(dados.emola.valor);
-
-    document.getElementById('emolaBar').style.width =
-        emolaPercentual + '%';
-}
-
-// CARREGAR DADOS INICIAIS
-atualizarDashboard(dadosDashboard);
-atualizarPagamentos(dadosPagamentos);
-
-// MENU LATERAL
-const menuButton = document.getElementById('menuButton');
-const menuClose = document.getElementById('menuClose');
-const sideMenu = document.getElementById('sideMenu');
-const menuOverlay = document.getElementById('menuOverlay');
-
-function abrirMenu() {
-    sideMenu.classList.add('active');
-    menuOverlay.classList.add('active');
-    menuButton.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-}
-
-function fecharMenu() {
-    sideMenu.classList.remove('active');
-    menuOverlay.classList.remove('active');
-    menuButton.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-}
-
-menuButton.addEventListener('click', abrirMenu);
-menuClose.addEventListener('click', fecharMenu);
-menuOverlay.addEventListener('click', fecharMenu);
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        fecharMenu();
-    }
 });
+
+/* EFECTUAR LOGIN */
+
+form.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    if (submitting) return;
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+        showMessage("Preencha todos os campos.");
+        return;
+    }
+
+    submitting = true;
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = "A entrar...";
+
+    message.className = "message";
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        showMessage(
+            "Login realizado com sucesso!",
+            "success"
+        );
+
+        window.location.replace("dashboard.html");
+
+    } catch (error) {
+
+        console.error("Erro de login:", error);
+
+        showMessage(translateError(error));
+
+        submitting = false;
+
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Entrar na conta";
+
+    }
+
+});
+
 </script>
 
 </body>
